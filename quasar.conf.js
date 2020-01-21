@@ -13,7 +13,8 @@ module.exports = function (ctx) {
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: [
-      'app.sass'
+      'app.sass',
+      'quasar.variables.sass'
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
@@ -124,13 +125,14 @@ module.exports = function (ctx) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'Wouter Vernaillen',
-        short_name: 'Wouter Vernaillen',
-        description: 'A Quasar Framework app',
+        start_url: '/',
+        name: 'Vernaillen.dev',
+        short_name: 'Vernaillen.dev',
+        description: 'Wouter Vernaillen\'s professional website',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#027be3',
+        theme_color: '#2e3d50',
         icons: [
           {
             'src': 'statics/icons/icon-128x128.png',
