@@ -93,7 +93,6 @@ export default {
     this.$router.afterEach((to, from, next) => {
       this.setCurrentPageName(to.path)
     })
-    console.debug('currentRoute.path:' + this.$route.path)
     this.setCurrentPageName(this.$route.path)
   },
   computed: {
@@ -106,20 +105,17 @@ export default {
           nextPos = 0
         }
       }
-      console.debug('nextPagePos: ' + nextPos)
       return this.$store.state.common.pages[nextPos].path
     },
     previousPagePath () {
       let nextPos = this.nrOfPages - 1
       if (this.$store.state.common.currentPageName !== '') {
-        console.debug('this.$store.state.common.currentPageName: ' + this.$store.state.common.currentPageName)
         const currentPos = this.getPagePosition(this.$store.state.common.currentPageName)
         nextPos = currentPos - 1
         if (nextPos < 0) {
           nextPos = this.nrOfPages - 1
         }
       }
-      console.debug('previousPagePos: ' + nextPos)
       return this.$store.state.common.pages[nextPos].path
     },
     currentPageIcon () {
@@ -157,7 +153,6 @@ export default {
           }
         }
       }
-      console.debug('pageName: ' + pageName)
       this.$store.commit('common/currentPageName', pageName)
     }
   }
