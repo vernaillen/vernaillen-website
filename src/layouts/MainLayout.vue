@@ -14,12 +14,12 @@
         </q-breadcrumbs>
       </q-toolbar>
     </q-header>
-
     <q-drawer v-model="showMenu"
               side="right"
               :width="250"
               :breakpoint="500"
-              bordered
+              behavior="mobile"
+              elevated
               content-class="bg-grey-1">
       <q-toolbar id="menu-toolbar"/>
       <q-list>
