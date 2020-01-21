@@ -10,8 +10,8 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0",
-    "docker-build": "quasar build --debug -m ssr && docker build . -t vernaillen/vernaillen-website:latest",
-    "docker": "npm run docker-build && docker run --name vernaillen-website -d -p 3000:3000 vernaillen/vernaillen-website:latest",
+    "docker-build": "quasar build -m ssr && docker build . -t vernaillen/vernaillen-website:latest",
+    "docker-start": "docker run --name vernaillen-website -d -p 3000:3000 vernaillen/vernaillen-website:latest",
     "dev": "quasar dev -m ssr"
   },
   "dependencies": {
