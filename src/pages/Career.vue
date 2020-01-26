@@ -127,12 +127,21 @@ export default {
     display: inline-block;
   }
   .q-timeline__entry--left .q-timeline__content label {
-    text-align: left;
+    text-align: right;
     padding-left: 10px;
     float: right;
   }
   .q-timeline__entry--right .q-timeline__content label {
-    text-align: right;
+    text-align: left;
     padding-right: 10px;
+  }
+  @media only screen and (max-width: 767px) {
+    .q-timeline__content label {
+      display: block;
+    }
+    .q-timeline__entry--left .q-timeline__content label {
+      float: none;
+      width: 100%;
+    }
   }
 </style>
