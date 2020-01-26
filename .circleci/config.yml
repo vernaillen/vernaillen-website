@@ -24,7 +24,8 @@ jobs:
       - run: yarn test
       - run: npm run build
       - run: docker build -t $IMAGE_NAME:latest .
-      - run: echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin docker push $IMAGE_NAME:latest
+      - run: echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      - run: docker push $IMAGE_NAME:latest
 workflows:
   version: 2
   build-master:
