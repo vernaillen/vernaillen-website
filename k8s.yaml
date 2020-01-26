@@ -1,0 +1,45 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: vernaillen-website
+  annotations:
+    service.beta.kubernetes.io/do-loadbalancer-protocol: "http"
+    service.beta.kubernetes.io/do-loadbalancer-algorithm: "round_robin"
+    service.beta.kubernetes.io/do-loadbalancer-tls-ports: "443"
+    service.beta.kubernetes.io/do-loadbalancer-certificate-id: "eb268c1c-1f3f-4ad6-81b2-42bd2f3e315a"
+    service.beta.kubernetes.io/do-loadbalancer-redirect-http-to-https: "true"
+spec:
+  type: LoadBalancer
+  selector:
+    app: vernaillen-website
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3000
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vernaillen-website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vernaillen-website
+  template:
+    metadata:
+      labels:
+        app: vernaillen-website
+    spec:
+      containers:
+        - name: vernaillen-website
+          image: vernaillen/vernaillen-website:0.0.1
+          ports:
+            - containerPort: 3000
+              protocol: TCP
