@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
         - name: vernaillen-website
-          image: vernaillen/vernaillen-website:0.0.1
+          image: vernaillen/vernaillen-website:$COMMIT_SHA1
           ports:
             - containerPort: 3000
               protocol: TCP
