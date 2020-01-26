@@ -14,7 +14,7 @@
     "docker-build": "npm run build && docker build . -t vernaillen/vernaillen-website:0.0.1",
     "docker-start": "docker run --name vernaillen-website -d -p 3000:3000 vernaillen/vernaillen-website:0.0.1",
     "docker-push": "docker push vernaillen/vernaillen-website:0.0.1",
-    "k8s-apply": "kubectl --kubeconfig ~/.kube/vernaillen-cluster-kubeconfig.yaml apply -f .circleci/k8s.yaml ",
+    "k8s-apply": "kubectl apply -f k8s.yaml ",
     "deploy": "npm run docker-build && npm run docker-push && npm run k8s-apply",
     "dev": "quasar dev -m ssr"
   },
