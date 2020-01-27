@@ -1,6 +1,6 @@
 FROM node:alpine
 WORKDIR /home/node/app
 COPY ./dist/ssr .
-RUN npm install --silent && npm cache clean --force
+RUN npm install --silent && npm cache clean --force && RUN npm install pm2 -g
 EXPOSE 3000
-CMD npm start index.js
+CMD NODE_PORT=3000 pm2-runtime index.js
