@@ -88,18 +88,18 @@ export default {
       tourSteps: [
         {
           target: '[data-v-step="0"]',
-          content: `Welcome to the <strong>Vernaillen website</strong>!`
+          content: `Welcome!`
         },
         {
           target: '[data-v-step="1"]',
-          content: 'Check out the awesome career timeline'
-        },
-        {
-          target: '[data-v-step="2"]',
-          content: 'This is the footer :D',
+          content: 'Check out my career timeline',
           params: {
             placement: 'top'
           }
+        },
+        {
+          target: '[data-v-step="2"]',
+          content: 'This is the footer :D'
         }
       ],
       tourCallbacks: {
