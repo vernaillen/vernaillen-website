@@ -6,6 +6,9 @@
 
 <script>
 export default {
-  name: 'PageContact'
+  name: 'PageContact',
+  mounted: function () {
+    this.$tours['myTour'].nextStep()
+  }
 }
 </script>

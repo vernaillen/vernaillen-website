@@ -39,7 +39,7 @@
     <q-page-container
       v-touch-swipe.mouse.left="swipeLeft"
       v-touch-swipe.mouse.right="swipeRight"
-      style="overflow: hidden;">
+      style="overflow: hidden;"  data-v-step="1">
       <transition :name="transitionName" mode="out-in">
         <router-view />
       </transition>
@@ -48,9 +48,11 @@
       </q-page-scroller>
     </q-page-container>
 
-    <q-footer class="bg-secondary text-grey-3 shadow-up-2 text-center q-pa-sm">
+    <q-footer class="bg-secondary text-grey-3 shadow-up-2 text-center q-pa-sm" data-v-step="2">
       © 2020 Vernaillen Consulting
     </q-footer>
+
+    <v-tour name="myTour" :steps="tourSteps" :options="tourOptions" :callbacks="tourCallbacks"></v-tour>
 
   </q-layout>
 </template>
@@ -73,8 +75,41 @@ export default {
       pages: this.$store.state.common.pages,
       nrOfPages: this.$store.state.common.nrOfPages,
       showBreadcrumb: false,
-      transitionName: 'slide-left'
+      transitionName: 'slide-left',
+      tourOptions: {
+        useKeyboardNavigation: true,
+        labels: {
+          buttonSkip: 'Skip tour',
+          buttonPrevious: 'Previous',
+          buttonNext: 'Next',
+          buttonStop: 'Finish'
+        }
+      },
+      tourSteps: [
+        {
+          target: '[data-v-step="0"]',
+          content: `Welcome to the <strong>Vernaillen website</strong>!`
+        },
+        {
+          target: '[data-v-step="1"]',
+          content: 'Check out the awesome career timeline'
+        },
+        {
+          target: '[data-v-step="2"]',
+          content: 'This is the footer :D',
+          params: {
+            placement: 'top'
+          }
+        }
+      ],
+      tourCallbacks: {
+        onPreviousStep: this.myCustomPreviousStepCallback,
+        onNextStep: this.myCustomNextStepCallback
+      }
     }
+  },
+  mounted: function () {
+    this.$tours['myTour'].start()
   },
   created () {
     this.$router.beforeEach((to, from, next) => {
@@ -154,6 +189,17 @@ export default {
         }
       }
       this.$store.commit('common/currentPageName', pageName)
+    },
+    myCustomPreviousStepCallback (currentStep) {
+      console.log('[Vue Tour] A custom previousStep callback has been called on step ' + (currentStep + 1))
+    },
+    myCustomNextStepCallback (currentStep) {
+      console.log('[Vue Tour] A custom nextStep callback has been called on step ' + (currentStep + 1))
+
+      if (currentStep === 0) {
+        this.$router.push('/career')
+        console.log('[Vue Tour] A custom nextStep callback has been called from step 2 to step 3')
+      }
     }
   }
 }
