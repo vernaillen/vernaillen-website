@@ -9,8 +9,8 @@
       <q-toolbar>
         <q-breadcrumbs separator="" gutter="lg">
           <q-breadcrumbs-el :to="previousPagePath" icon="fas fa-backward" />
-          <q-breadcrumbs-el :label="$store.state.common.currentPageName" :icon="currentPageIcon" class="text-black v-step-1" />
-          <q-breadcrumbs-el :to="nextPagePath" icon="fas fa-forward" class="text-primary v-step-2" />
+          <q-breadcrumbs-el :label="$store.state.common.currentPageName" :icon="currentPageIcon" class="text-black v-step-2" />
+          <q-breadcrumbs-el :to="nextPagePath" icon="fas fa-forward" class="text-primary" />
         </q-breadcrumbs>
       </q-toolbar>
     </q-header>
@@ -39,7 +39,8 @@
     <q-page-container
       v-touch-swipe.mouse.left="swipeLeft"
       v-touch-swipe.mouse.right="swipeRight"
-      style="overflow: hidden;">
+      style="overflow: hidden;"
+      class="v-step-1">
       <transition :name="transitionName" mode="out-in">
         <router-view />
       </transition>
@@ -96,16 +97,13 @@ export default {
         },
         {
           target: '.v-step-1',
-          content: 'Check out my career timeline',
-          params: {
-            placement: 'left'
-          }
+          content: 'Check out my career timeline'
         },
         {
           target: '.v-step-2',
           content: 'You can navigate through the pages with the arrow buttons',
           params: {
-            placement: 'right'
+            placement: 'bottom'
           }
         },
         {
@@ -224,7 +222,7 @@ export default {
       }
     },
     tourStopCallback (currentStep) {
-      this.showMenu = true
+      this.showMenu = false
     }
   }
 }
