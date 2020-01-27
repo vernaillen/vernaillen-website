@@ -4,9 +4,9 @@
         <div class="bg-overlay"></div>
         <q-carousel-slide :name="1" :img-src="require('../assets/img/53beb950b2b85940c1e8bef237d4e332-xlarge.jpg')" class="slide">
           <div class="bg-overlay"></div>
-          <div class="slide-header text-center">
+          <div class="slide-header text-center v-step-0">
             <h1 class="text-grey-4">Wouter Vernaillen</h1>
-            <p class="text-grey-5" data-v-step="0">Freelance Full Stack Java &amp; JavaScript Developer</p>
+            <p class="text-grey-5">Freelance Full Stack Java &amp; JavaScript Developer</p>
           </div>
         </q-carousel-slide>
       </q-carousel>

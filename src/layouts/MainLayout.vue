@@ -4,13 +4,13 @@
       <q-toolbar>
         <logo/>
         <q-space/>
-        <q-btn dense flat round icon="fas fa-bars" @click="showMenu = !showMenu" alt="Toggle menu" aria-label="Toggle menu" />
+        <q-btn dense flat round icon="fas fa-bars" @click="showMenu = !showMenu" alt="Toggle menu" aria-label="Toggle menu" class="v-step-4" />
       </q-toolbar>
       <q-toolbar>
         <q-breadcrumbs separator="" gutter="lg">
           <q-breadcrumbs-el :to="previousPagePath" icon="fas fa-backward" />
-          <q-breadcrumbs-el :label="$store.state.common.currentPageName" :icon="currentPageIcon" class="text-black" />
-          <q-breadcrumbs-el :to="nextPagePath" icon="fas fa-forward" class="text-primary" />
+          <q-breadcrumbs-el :label="$store.state.common.currentPageName" :icon="currentPageIcon" class="text-black v-step-1" />
+          <q-breadcrumbs-el :to="nextPagePath" icon="fas fa-forward" class="text-primary v-step-2" />
         </q-breadcrumbs>
       </q-toolbar>
     </q-header>
@@ -20,7 +20,7 @@
               :breakpoint="500"
               behavior="mobile"
               elevated
-              content-class="bg-grey-1">
+              content-class="bg-grey-1 v-step-3">
       <q-toolbar id="menu-toolbar"/>
       <q-list>
         <q-separator></q-separator>
@@ -39,7 +39,7 @@
     <q-page-container
       v-touch-swipe.mouse.left="swipeLeft"
       v-touch-swipe.mouse.right="swipeRight"
-      style="overflow: hidden;"  data-v-step="1">
+      style="overflow: hidden;">
       <transition :name="transitionName" mode="out-in">
         <router-view />
       </transition>
@@ -48,7 +48,7 @@
       </q-page-scroller>
     </q-page-container>
 
-    <q-footer class="bg-secondary text-grey-3 shadow-up-2 text-center q-pa-sm" data-v-step="2">
+    <q-footer class="bg-secondary text-grey-3 shadow-up-2 text-center q-pa-sm">
       © 2020 Vernaillen Consulting
     </q-footer>
 
@@ -78,6 +78,7 @@ export default {
       transitionName: 'slide-left',
       tourOptions: {
         useKeyboardNavigation: true,
+        startTimeout: 1200,
         labels: {
           buttonSkip: 'Skip tour',
           buttonPrevious: 'Previous',
@@ -87,24 +88,45 @@ export default {
       },
       tourSteps: [
         {
-          target: '[data-v-step="0"]',
-          content: `Welcome!`
-        },
-        {
-          target: '[data-v-step="1"]',
-          content: 'Check out my career timeline',
+          target: '.v-step-0',
+          content: `Welcome to my website!<br/>Let me give you a quick tour :)<br/>`,
           params: {
-            placement: 'top'
+            placement: 'bottom'
           }
         },
         {
-          target: '[data-v-step="2"]',
-          content: 'This is the footer :D'
+          target: '.v-step-1',
+          content: 'Check out my career timeline',
+          params: {
+            placement: 'left'
+          }
+        },
+        {
+          target: '.v-step-2',
+          content: 'You can navigate through the pages with the arrow buttons',
+          params: {
+            placement: 'right'
+          }
+        },
+        {
+          target: '.v-step-3',
+          content: 'or swipe left and right on mobile devices',
+          params: {
+            placement: 'right'
+          }
+        },
+        {
+          target: '.v-step-4',
+          content: 'or use the mobile menu',
+          params: {
+            placement: 'right'
+          }
         }
       ],
       tourCallbacks: {
-        onPreviousStep: this.myCustomPreviousStepCallback,
-        onNextStep: this.myCustomNextStepCallback
+        onPreviousStep: this.tourNextStepCallback,
+        onNextStep: this.tourNextStepCallback,
+        onStop: this.tourStopCallback
       }
     }
   },
@@ -190,16 +212,19 @@ export default {
       }
       this.$store.commit('common/currentPageName', pageName)
     },
-    myCustomPreviousStepCallback (currentStep) {
-      console.log('[Vue Tour] A custom previousStep callback has been called on step ' + (currentStep + 1))
-    },
-    myCustomNextStepCallback (currentStep) {
-      console.log('[Vue Tour] A custom nextStep callback has been called on step ' + (currentStep + 1))
-
+    tourNextStepCallback (currentStep) {
       if (currentStep === 0) {
         this.$router.push('/career')
-        console.log('[Vue Tour] A custom nextStep callback has been called from step 2 to step 3')
       }
+      if (currentStep === 1) {
+        this.$router.push('/contact')
+      }
+      if (currentStep === 2) {
+        this.$router.push('/home')
+      }
+    },
+    tourStopCallback (currentStep) {
+      this.showMenu = true
     }
   }
 }
