@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/vernaillen/vernaillen-website.svg?style=svg)](https://circleci.com/gh/vernaillen/vernaillen-website)
+
 # Wouter Vernaillen (vernaillen-website)
 
 A Quasar Framework app
