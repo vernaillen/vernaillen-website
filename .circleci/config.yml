@@ -5,7 +5,7 @@ jobs:
       - image: circleci/node:13
     environment:
       IMAGE_NAME: vernaillen/vernaillen-website
-      IMAGE_TAG: 0.0.1-ci${CIRCLE_BUILD_NUM}
+      IMAGE_TAG: 0.0.1-ci$CIRCLE_BUILD_NUM
     working_directory: ~/repo
     steps:
       - checkout
