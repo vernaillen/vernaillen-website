@@ -1,4 +1,5 @@
-[![CircleCI](https://circleci.com/gh/vernaillen/vernaillen-website.svg?style=svg)](https://circleci.com/gh/vernaillen/vernaillen-website)
+[![CircleCI](https://badgen.net/circleci/github/vernaillen/vernaillen-website)](https://circleci.com/gh/vernaillen/vernaillen-website)
+[![Last Commit](https://badgen.net/github/last-commit/vernaillen/vernaillen-website)](https://circleci.com/gh/vernaillen/vernaillen-website)
 
 # Wouter Vernaillen (vernaillen-website)
 
