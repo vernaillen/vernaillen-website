@@ -1,6 +1,9 @@
 export const toc = (state, toc) => {
   state.toc = toc
 }
+export const blogPosts = (state, blogPosts) => {
+  state.blogPosts = blogPosts
+}
 export const frontmatterData = (state, frontmatterData) => {
   state.frontmatterData = frontmatterData
 }

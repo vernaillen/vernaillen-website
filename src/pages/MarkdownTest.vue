@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import postTest from '../markdown/postTest.vmd'
+import postTest from '../blogposts/post-test.vmd'
 
 export default {
   name: 'MarkdownTest',

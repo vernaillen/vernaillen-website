@@ -4,12 +4,12 @@
       <q-toolbar>
         <logo/>
         <q-space/>
-        <q-btn dense flat round icon="fas fa-bars" @click="showMenu = !showMenu" alt="Toggle menu" aria-label="Toggle menu" class="v-step-4" />
+        <q-btn dense flat round icon="fas fa-bars" @click="showMenu = !showMenu" alt="Toggle menu" aria-label="Toggle menu" />
       </q-toolbar>
       <q-toolbar>
         <q-breadcrumbs separator="" gutter="lg">
           <q-breadcrumbs-el :to="previousPagePath" icon="fas fa-backward" />
-          <q-breadcrumbs-el :label="$store.state.common.currentPageName" :icon="currentPageIcon" class="text-black v-step-2" />
+          <q-breadcrumbs-el :label="$store.state.common.currentPageName" :icon="currentPageIcon" class="text-black" />
           <q-breadcrumbs-el :to="nextPagePath" icon="fas fa-forward" class="text-primary" />
         </q-breadcrumbs>
       </q-toolbar>
@@ -20,7 +20,7 @@
               :breakpoint="500"
               behavior="mobile"
               elevated
-              content-class="bg-grey-1 v-step-3">
+              content-class="bg-grey-1">
       <q-toolbar id="menu-toolbar"/>
       <q-list>
         <q-separator></q-separator>
@@ -39,8 +39,7 @@
     <q-page-container
       v-touch-swipe.mouse.left="swipeLeft"
       v-touch-swipe.mouse.right="swipeRight"
-      style="overflow: hidden;"
-      class="v-step-1">
+      style="overflow: hidden;">
       <transition :name="transitionName" mode="out-in">
         <router-view />
       </transition>
@@ -52,8 +51,6 @@
     <q-footer class="bg-secondary text-grey-3 shadow-up-2 text-center q-pa-sm">
       © 2020 Vernaillen Consulting
     </q-footer>
-
-    <v-tour name="myTour" :steps="tourSteps" :options="tourOptions" :callbacks="tourCallbacks"></v-tour>
 
   </q-layout>
 </template>
@@ -76,60 +73,8 @@ export default {
       pages: this.$store.state.common.pages,
       nrOfPages: this.$store.state.common.nrOfPages,
       showBreadcrumb: false,
-      transitionName: 'slide-left',
-      tourOptions: {
-        useKeyboardNavigation: true,
-        startTimeout: 1200,
-        labels: {
-          buttonSkip: 'Skip tour',
-          buttonPrevious: 'Previous',
-          buttonNext: 'Next',
-          buttonStop: 'Finish'
-        }
-      },
-      tourSteps: [
-        {
-          target: '.v-step-0',
-          content: 'Welcome to my website!<br/>Let me give you a quick tour :)<br/>',
-          params: {
-            placement: 'bottom'
-          }
-        },
-        {
-          target: '.v-step-1',
-          content: 'Check out my career timeline'
-        },
-        {
-          target: '.v-step-2',
-          content: 'You can navigate through the pages with the arrow buttons',
-          params: {
-            placement: 'bottom'
-          }
-        },
-        {
-          target: '.v-step-3',
-          content: 'or swipe left and right on mobile devices',
-          params: {
-            placement: 'right'
-          }
-        },
-        {
-          target: '.v-step-4',
-          content: 'or use the mobile menu',
-          params: {
-            placement: 'right'
-          }
-        }
-      ],
-      tourCallbacks: {
-        onPreviousStep: this.tourNextStepCallback,
-        onNextStep: this.tourNextStepCallback,
-        onStop: this.tourStopCallback
-      }
+      transitionName: 'slide-left'
     }
-  },
-  mounted: function () {
-    this.$tours.myTour.start()
   },
   created () {
     this.$router.beforeEach((to, from, next) => {
@@ -209,20 +154,6 @@ export default {
         }
       }
       this.$store.commit('common/currentPageName', pageName)
-    },
-    tourNextStepCallback (currentStep) {
-      if (currentStep === 0) {
-        this.$router.push('/career')
-      }
-      if (currentStep === 1) {
-        this.$router.push('/contact')
-      }
-      if (currentStep === 2) {
-        this.$router.push('/home')
-      }
-    },
-    tourStopCallback (currentStep) {
-      this.showMenu = false
     }
   }
 }
