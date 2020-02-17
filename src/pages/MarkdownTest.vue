@@ -1,17 +1,25 @@
 <template>
   <q-page padding class="flex flex-center" >
-    <q-markdown :src="markdown"/>
+    Author: {{fm.author}}<br/>
+    Location: {{fm.location}}<br/>
+    Date: {{fm.date}}
+    <br/>
+    <post-test />
   </q-page>
 </template>
 
 <script>
-import markdown from '../markdown/markdown.md'
+import postTest from '../markdown/postTest.vmd'
 
 export default {
   name: 'MarkdownTest',
-  data () {
-    return {
-      markdown: markdown
+
+  components: {
+    postTest
+  },
+  computed: {
+    fm () {
+      return this.$store.state.common.frontmatterData
     }
   }
 }

@@ -1,6 +1,7 @@
 export default function () {
   return {
     toc: [],
+    frontmatterData: {},
     pages: {
       0: { name: 'Home', path: '/home', icon: 'fas fa-home' },
       1: { name: 'Career', path: '/career', icon: 'fas fa-briefcase' },

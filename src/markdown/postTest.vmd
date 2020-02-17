@@ -1,0 +1,104 @@
+---
+title: QMarkdown Docs
+desc: This is the documentation for QMarkdown
+date: 17/02/2020
+tag:
+- frontmatter
+- vuepress
+author: Wouter
+location: Zottegem
+---
+
+<template>
+  <div class="q-pa-md q-gutter-sm q-markdown">
+
+    QMarkdown
+    ===
+
+    QMarkdown is a Quasar component as well as a [Quasar App Extension](https://v1.quasar.dev/app-extensions/introduction). It provides the ability for your Quasar app to display markdown.
+
+    # Features
+
+    ## Markdown Constructs
+
+    - Abbreviations
+    - Blockquotes
+    - Code and Code Highlighting
+    - Containers
+    - Definition Lists
+    - Emojies
+    - Emphasis
+    - Footnotes
+    - Headings
+    - Images
+    - Inserts
+    - Links
+    - Lists
+    - Marks
+    - Rules
+    - Subscript/Superscript
+    - Tables
+    - Tasklists
+    - Titles
+    - Typography
+
+    ## Loaders
+    The loaders are only available if you installed via the QMarkdown App Extension.
+
+    - markdown (.md) loader that can load your markdown as text to be processed by QMarkdown
+    - vue+markdown (.vmd) loader that can process markdown, then hand off to Vue to be processed
+
+    ## Front-Matter
+    - The front-matter functonality is only available to vue+markdown (`.vmd`) files.
+
+    ## Utility Functions
+    - `getTagParts` that can process a Vue SFC file and return the `template`, `script` and `style` parts
+
+    # Install
+    To add this App Extension to your Quasar application, run the following (in your Quasar app folder):
+    ```
+    quasar ext add @quasar/qmarkdown
+    ```
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      // eslint-disable-next-line
+      frontMatter: {},
+      // eslint-disable-next-line
+      tocData: []
+    }
+  },
+
+  mounted () {
+    this.toc = this.tocData
+    this.frontmatterData = this.frontMatter
+    document.title = this.frontMatter.title
+  },
+
+  computed: {
+    toc:
+    {
+      get () {
+        return this.$store.state.common.toc
+      },
+      set (toc) {
+        this.$store.commit('common/toc', toc)
+      }
+    },
+    frontmatterData:
+    {
+      get () {
+        return this.$store.state.common.frontmatterData
+      },
+      set (frontmatterData) {
+        this.$store.commit('common/frontmatterData', frontmatterData)
+      }
+    }
+  }
+}
+</script>
+
