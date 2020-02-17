@@ -25,6 +25,7 @@ jobs:
       - run: yarn test
       - run: sudo yarn global add now
       - run: yarn build
+      - run: now init vernaillen-website
       - run: now deploy -t ${NOW_TOKEN} --prod --confirm --local-config .now/production.json ./dist/pwa
 workflows:
   version: 2
