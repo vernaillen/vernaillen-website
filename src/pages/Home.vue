@@ -6,7 +6,8 @@
           <div class="bg-overlay"></div>
           <div class="slide-header text-center">
             <h1 class="text-grey-4">Wouter Vernaillen</h1>
-            <p class="text-grey-5">Freelance Full Stack Java &amp; JavaScript Developer</p>
+            <h6 class="text-grey-5">Freelance Full Stack Developer</h6>
+            <p class="text-grey-5">Java, Spring, Vue, Angular & Liferay</p>
           </div>
         </q-carousel-slide>
       </q-carousel>
