@@ -5,32 +5,56 @@ defaults: &defaults
 
 version: 2.1
 jobs:
-  build:
+  checkout:
     <<: *defaults
     steps:
       - checkout
       - attach_workspace:
           at: ~/tmp/vernaillen-website
-      - setup_remote_docker
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/tmp/vernaillen-website
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+            - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
+            - npm-cache-{{ .Branch }}
+            - npm-cache-
       - run: yarn install
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn test
-      - run: sudo yarn global add now
       - run: yarn build
-      - run: now deploy -t ${NOW_TOKEN} --prod --confirm --local-config .now/production.json ./dist/pwa
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/tmp/vernaillen-website
+      - run: yarn test
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/tmp/vernaillen-website
+      - run: sudo yarn global add now
+      - run: now deploy -t ${NOW_TOKEN} --prod --confirm ./dist/pwa
+
 workflows:
   version: 2
-  build-master:
+  build-test-deploy:
     jobs:
-      - build:
+      - checkout:
           filters:
             branches:
               only: master
+      - build:
+          requires:
+            - checkout
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
