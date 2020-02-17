@@ -10,9 +10,8 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0",
-    "build": "quasar build -m ssr ",
-    "build-pwa": "quasar build -m pwa ",
-    "docker-build": "yarn build-pwa && docker build . -t vernaillen/vernaillen-website:0.0.1",
+    "build": "quasar build -m pwa ",
+    "docker-build": "yarn build && docker build . -t vernaillen/vernaillen-website:0.0.1",
     "docker-start": "docker run --name vernaillen-website -d -p 80:80 vernaillen/vernaillen-website:0.0.1",
     "docker-push": "docker push vernaillen/vernaillen-website:0.0.1",
     "k8s-apply": "kubectl apply -f k8s.yaml ",
