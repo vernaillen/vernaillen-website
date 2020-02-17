@@ -90,7 +90,7 @@ export default {
       tourSteps: [
         {
           target: '.v-step-0',
-          content: `Welcome to my website!<br/>Let me give you a quick tour :)<br/>`,
+          content: 'Welcome to my website!<br/>Let me give you a quick tour :)<br/>',
           params: {
             placement: 'bottom'
           }
@@ -129,7 +129,7 @@ export default {
     }
   },
   mounted: function () {
-    this.$tours['myTour'].start()
+    this.$tours.myTour.start()
   },
   created () {
     this.$router.beforeEach((to, from, next) => {

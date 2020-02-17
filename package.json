@@ -11,28 +11,33 @@
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0",
     "build": "quasar build -m ssr ",
-    "docker-build": "npm run build && docker build . -t vernaillen/vernaillen-website:0.0.1",
+    "docker-build": "yarn build && docker build . -t vernaillen/vernaillen-website:0.0.1",
     "docker-start": "docker run --name vernaillen-website -d -p 3000:3000 vernaillen/vernaillen-website:0.0.1",
     "docker-push": "docker push vernaillen/vernaillen-website:0.0.1",
     "k8s-apply": "kubectl apply -f k8s.yaml ",
-    "deploy": "npm run docker-build && npm run docker-push && npm run k8s-apply",
+    "deploy": "yarn docker-build && yarn docker-push && yarn k8s-apply",
     "dev": "quasar dev -m ssr"
   },
   "dependencies": {
-    "@quasar/extras": "^1.0.0",
-    "axios": "^0.18.1",
-    "quasar": "^1.0.0",
+    "@quasar/extras": "^1.5.1",
+    "axios": "^0.19.2",
+    "quasar": "^1.9.2",
     "vue-i18n": "^8.0.0",
     "vue-tour": "^1.2.0",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0",
-    "@vue/eslint-config-standard": "^4.0.0",
+    "@quasar/app": "^1.5.6",
+    "@quasar/quasar-app-extension-qmarkdown": "^1.0.23",
+    "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.10.0",
-    "eslint-loader": "^2.1.1",
-    "eslint-plugin-vue": "^5.0.0"
+    "eslint": "^6.8.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-vue": "^6.2.0"
   },
   "engines": {
     "node": ">= 10.18.1",
