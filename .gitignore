@@ -33,4 +33,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 
-.now
+.now/project.json
