@@ -9,10 +9,9 @@ export default function () {
       0: { name: 'Home', path: '/home', icon: 'fas fa-home' },
       1: { name: 'Career', path: '/career', icon: 'fas fa-briefcase' },
       2: { name: 'Blog', path: '/blog', icon: 'fas fa-blog' },
-      3: { name: 'Markdown', path: '/md', icon: 'fas fa-at' },
-      4: { name: 'Contact', path: '/contact', icon: 'fas fa-at' }
+      3: { name: 'Contact', path: '/contact', icon: 'fas fa-at' }
     },
-    nrOfPages: 5,
+    nrOfPages: 4,
     currentPageName: 'Home',
     currentBlogPostName: '',
     blogPosts: {
