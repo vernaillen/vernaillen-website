@@ -20,7 +20,7 @@ jobs:
       - run: yarn test
       - run: sudo yarn global add now
       - run: yarn build
-      - run: now -t ${NOW_TOKEN} --prod
+      - run: now -t ${NOW_TOKEN} --prod --confirm
 workflows:
   version: 2
   build-master:
