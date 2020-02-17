@@ -47,8 +47,6 @@ workflows:
           filters:
             branches:
               only: master
-          requires:
-            - checkout
       - test:
           requires:
             - build
