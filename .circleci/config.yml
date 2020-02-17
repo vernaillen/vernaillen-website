@@ -5,18 +5,10 @@ defaults: &defaults
 
 version: 2.1
 jobs:
-  checkout:
-    <<: *defaults
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/tmp/vernaillen-website
-      - persist_to_workspace:
-          root: .
-          paths: .
   build:
     <<: *defaults
     steps:
+      - checkout
       - attach_workspace:
           at: ~/tmp/vernaillen-website
       - restore_cache:
@@ -30,6 +22,9 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn build
+      - persist_to_workspace:
+          root: .
+          paths: .
   test:
     <<: *defaults
     steps:
@@ -48,11 +43,10 @@ workflows:
   version: 2
   build-test-deploy:
     jobs:
-      - checkout:
+      - build:
           filters:
             branches:
               only: master
-      - build:
           requires:
             - checkout
       - test:
