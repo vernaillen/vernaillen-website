@@ -32,7 +32,7 @@ jobs:
           at: ~/tmp/vernaillen-website
       - run: yarn test:unit
       - run: sudo yarn global add codecov
-      - run: yarn test:unit:coverage
+      - run: codecov
   deploy:
     <<: *defaults
     steps:
