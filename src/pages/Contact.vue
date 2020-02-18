@@ -2,7 +2,7 @@
   <q-page padding class="q-page-max1024">
 
     <summary class="btn btn-sm css-truncate" role="button">
-      <i>Branch:</i>
+      <em>Branch:</em>
       <span class="css-truncate-target" data-menu-button="">master</span>
     </summary>
     <div class="Box Box--condensed md js-code-block-container">

@@ -13,7 +13,7 @@
         >
 
           <template v-slot:append>
-            <img src="https://cdn.quasar.dev/img/layout-gallery/img-github-search-key-slash.svg">
+            <img alt="search key slash" src="https://cdn.quasar.dev/img/layout-gallery/img-github-search-key-slash.svg">
           </template>
 
           <template v-slot:no-option>
@@ -52,7 +52,7 @@
         </q-select>
 
         <div v-if="$q.screen.gt.sm" class="GL__toolbar-link q-ml-xs q-gutter-md text-body2 text-weight-bold row items-center no-wrap">
-          <a href="https://github.com/vernaillen" target="_blank" class="text-white">
+          <a href="https://github.com/vernaillen" target="_blank" class="text-white" rel="noopener noreferrer">
             GitHub
           </a>
         </div>
@@ -80,7 +80,7 @@
 
           <q-btn dense flat no-wrap>
             <q-avatar rounded size="20px">
-              <img src="https://avatars0.githubusercontent.com/u/102268?s=40&v=4">
+              <img alt="Wouter's GitHub Avatar" src="https://avatars0.githubusercontent.com/u/102268?s=40&v=4">
             </q-avatar>
             <q-icon name="arrow_drop_down" size="16px" />
 
@@ -163,7 +163,7 @@
     </q-page-container>
 
     <q-footer class="bg-secondary text-grey-3 shadow-up-4 text-center q-pa-sm">
-      Powered by <a href="https://vuejs.org" target="_blank"><img src="https://vuejs.org/images/logo.png" style="height: 20px;margin-bottom: -5px; margin-right: 25px"/></a>  © 2020 Vernaillen Consulting
+      Powered by <a alt="Vue" href="https://vuejs.org" target="_blank" rel="noopener noreferrer"><img src="https://vuejs.org/images/logo.png" style="height: 20px;margin-bottom: -5px; margin-right: 25px"/></a>  © 2020 Vernaillen Consulting
     </q-footer>
   </q-layout>
 </template>

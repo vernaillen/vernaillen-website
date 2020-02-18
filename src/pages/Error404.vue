@@ -2,6 +2,7 @@
   <div class="fixed-center text-center">
     <p>
       <img
+        alt="sad face"
         src="~assets/sad.svg"
         style="width:30vw;max-width:150px;"
       >

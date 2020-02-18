@@ -50,7 +50,7 @@
     </q-page-container>
 
     <q-footer class="bg-secondary text-grey-3 shadow-up-4 text-center q-pa-sm">
-      Powered by <a href="https://vuejs.org" target="_blank"><img src="https://vuejs.org/images/logo.png" style="height: 20px;margin-bottom: -5px; margin-right: 25px"/></a>  © 2020 Vernaillen Consulting
+      Powered by <a href="https://vuejs.org" target="_blank" rel="noopener noreferrer"><img alt="Vue" src="https://vuejs.org/images/logo.png" style="height: 20px;margin-bottom: -5px; margin-right: 25px"/></a>  © 2020 Vernaillen Consulting
     </q-footer>
 
   </q-layout>
