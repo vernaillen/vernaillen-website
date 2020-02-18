@@ -1,6 +1,6 @@
 {
   "name": "vernaillen-website",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Quasar Framework app",
   "productName": "Wouter Vernaillen",
   "cordovaId": "com.vernaillen.website.app",

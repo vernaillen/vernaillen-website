@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHr lpR fFr">
-    <q-header class="bg-white text-grey-9 shadow-1">
+    <q-header class="bg-white text-grey-9 shadow-4">
       <q-toolbar>
         <logo/>
         <q-space/>
@@ -44,11 +44,11 @@
         <router-view />
       </transition>
       <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
-        <q-btn fab icon="fas fa-long-arrow-alt-up" color="primary" alt="Back to top" aria-label="Back to top" />
+        <q-btn fab icon="fas fa-long-arrow-alt-up" class="shadow-4" color="primary" alt="Back to top" aria-label="Back to top" />
       </q-page-scroller>
     </q-page-container>
 
-    <q-footer class="bg-secondary text-grey-3 shadow-up-2 text-center q-pa-sm">
+    <q-footer class="bg-secondary text-grey-3 shadow-up-4 text-center q-pa-sm">
       © 2020 Vernaillen Consulting
     </q-footer>
 
