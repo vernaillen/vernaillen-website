@@ -140,6 +140,10 @@
           <div class="d-inline"><q-icon name="fas fa-house-damage"></q-icon></div>
           Home
         </a>
+        <a :class="navItemClass('/career')" href="/#/career">
+          <div class="d-inline"><q-icon name="fas fa-briefcase"></q-icon></div>
+          Career
+        </a>
         <a :class="navItemClass('/blog')" href="/#/blog">
           <div class="d-inline"><q-icon name="fas fa-blog"></q-icon></div>
           Blog
@@ -247,6 +251,9 @@ export default {
       margin-bottom: 3px
       margin-right: 5px
       color: #666
+
+  .reponav-item.selected
+    border-color: #1bbc9b #e1e4e8 transparent
 
   summary.btn a
     color: #24292e
