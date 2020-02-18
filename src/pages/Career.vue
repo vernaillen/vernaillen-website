@@ -6,7 +6,7 @@
         subtitle="April 2019 - present"
         side="right"
         color="kindengezin"
-        avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy2dgl6zPZfpCL5fBoVlPgFvLRMY6p44-HSKEgxk4a7ufVIghy"
+        :avatar="require('../assets/img/kindengezin.jpg')"
       >
         <div>
           <label class="text-grey-6">project</label>Governmental portal<br/>
@@ -21,7 +21,7 @@
         subtitle="2019"
         side="left"
         color="aristo"
-        avatar="https://test.aristolivingoutdoors.com/documents/89923/90356/aristo_icon_pale.svg"
+        :avatar="require('../assets/img/aristo.png')"
       >
         <div>
           <label class="text-grey-6">project</label>E-commerce website<br/>
@@ -36,7 +36,7 @@
         subtitle="2018 - 2019"
         side="right"
         color="idewe"
-        avatar="https://www.tarieven-externe-diensten.be/documents/448485/448840/over_Idewe.png"
+        :avatar="require('../assets/img/idewe.png')"
       >
         <div>
           <label class="text-grey-6">project</label>bla bla bla<br/>
@@ -51,7 +51,7 @@
         subtitle="2014 - 2017"
         side="left"
         color="kindengezin"
-        avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy2dgl6zPZfpCL5fBoVlPgFvLRMY6p44-HSKEgxk4a7ufVIghy"
+        :avatar="require('../assets/img/kindengezin.jpg')"
       >
         <div>
           <label class="text-grey-6">project</label>bla bla bla<br/>
@@ -65,8 +65,8 @@
         title="Colruyt"
         subtitle="2013"
         side="right"
-        color="orange"
-        avatar="https://crm.theshift.be/media/cache/attachment/resize/111/member_logo/57e0e24e0638f.jpeg"
+        color="colruyt"
+        :avatar="require('../assets/img/colruyt.png')"
       >
         <div>
           <label class="text-grey-6">project</label>bla bla bla<br/>
@@ -120,6 +120,13 @@ export default {
   }
   .text-aristo {
     color: #8b9064;
+  }
+  .text-colruyt {
+    color: #a59c94
+  }
+  .q-timeline__dot::before,
+  .q-timeline__dot::after {
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2),0 4px 5px rgba(0,0,0,0.14),0 1px 10px rgba(0,0,0,0.12);
   }
 
   .q-timeline__content label {
