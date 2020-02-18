@@ -30,7 +30,9 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/tmp/vernaillen-website
-      - run: yarn test
+      - run: yarn test:unit
+      - run: sudo yarn global add codecov
+      - run: yarn test:unit:coverage
   deploy:
     <<: *defaults
     steps:
