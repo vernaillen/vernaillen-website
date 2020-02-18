@@ -22,6 +22,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn build
+      - sonarcloud/scan
       - persist_to_workspace:
           root: .
           paths: .
@@ -41,11 +42,15 @@ jobs:
       - run: sudo yarn global add now
       - run: now deploy -t ${NOW_TOKEN} --prod --local-config .now/production.json --confirm ./dist/pwa
 
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.1
+
 workflows:
   version: 2
   build-test-deploy:
     jobs:
       - build:
+          context: SonarCloud
           filters:
             branches:
               only: master
