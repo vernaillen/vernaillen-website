@@ -1,8 +1,11 @@
 <template>
-  <q-page padding>
+  <q-page padding class="q-page-max1024">
     <template>
       {{pathMatch}}<br/>
       <q-markdown :src="content"/>
+      <q-btn to="/blog" class="shadow-4" icon="fas fa-long-arrow-alt-left">
+        Blog overview
+      </q-btn>
     </template>
   </q-page>
 </template>

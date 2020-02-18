@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="flex flex-center" >
+  <q-page padding class="q-page-max1024">
     <q-list>
       <div v-for="(post, index) in blogPosts" :key="index">
         <q-item
