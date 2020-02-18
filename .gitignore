@@ -34,3 +34,4 @@ yarn-error.log*
 *.sln
 
 .now/project.json
+/test/jest/coverage
