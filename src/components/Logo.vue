@@ -1,5 +1,5 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <router-link to="/home" class="absolute-center" area-label="Go to home">
+  <router-link to="/home" area-label="Go to home">
     <q-img
       id="vernaillen-logo"
       :src="require('../assets/img/vernaillen-logo.png')"
