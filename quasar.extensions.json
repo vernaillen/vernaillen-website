@@ -13,8 +13,5 @@
     "options": [
       "scripts"
     ]
-  },
-  "load-markdown": {
-    "folder": "src/markdown"
   }
 }
