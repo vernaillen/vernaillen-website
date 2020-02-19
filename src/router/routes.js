@@ -7,10 +7,9 @@ const routes = [
       { path: '/home', component: () => import('pages/Home.vue') },
       { path: '/career', component: () => import('pages/Career.vue') },
       { path: '/blog', component: () => import('pages/BlogOverview.vue') },
-      { path: '/blog/*', component: () => import('pages/BlogPost.vue'), props: true },
-      { path: '/md', component: () => import('pages/MarkdownTest.vue') },
-      { path: '/about', component: () => import('pages/About.vue') },
-      { path: '/contact', component: () => import('pages/Contact.vue') },
+      { path: '/blog/*', component: () => import('pages/MarkdownPage.vue'), props: true },
+      { path: '/page/*', component: () => import('pages/MarkdownPage.vue'), props: true },
+      { path: '/badges', component: () => import('pages/Badges.vue'), props: true },
       { path: '', redirect: '/home' }
     ]
   }

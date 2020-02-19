@@ -1,65 +1,12 @@
 <template>
-  <q-layout>
+  <q-layout view="hHr lpR fFr">
     <q-header elevated class="text-white" style="background: #24292e" height-hint="61.59">
-      <q-toolbar class="q-py-sm q-px-md">
+      <q-toolbar class="q-pb-md q-px-md max1024">
         <logo/>
-
-        <q-select
-          ref="search" dark dense standout use-input hide-selected
-          class="GL__toolbar-select"
-          color="black" :stack-label="false" label="Search or jump to..."
-          v-model="text" :options="filteredOptions" @filter="filter"
-          style="width: 300px"
-        >
-
-          <template v-slot:append>
-            <img alt="search key slash" src="https://cdn.quasar.dev/img/layout-gallery/img-github-search-key-slash.svg">
-          </template>
-
-          <template v-slot:no-option>
-            <q-item>
-              <q-item-section>
-                <div class="text-center">
-                  <q-spinner-pie
-                    color="grey-5"
-                    size="24px"
-                  />
-                </div>
-              </q-item-section>
-            </q-item>
-          </template>
-
-          <template v-slot:option="scope">
-            <q-item
-              v-bind="scope.itemProps"
-              v-on="scope.itemEvents"
-              class="GL__select-GL__menu-link"
-            >
-              <q-item-section side>
-                <q-icon name="collections_bookmark" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label v-html="scope.opt.label" />
-              </q-item-section>
-              <q-item-section side :class="{ 'default-type': !scope.opt.type }">
-                <q-btn outline dense no-caps text-color="blue-grey-5" size="12px" class="bg-grey-1 q-px-sm">
-                  {{ scope.opt.type || 'Jump to' }}
-                  <q-icon name="subdirectory_arrow_left" size="14px" />
-                </q-btn>
-              </q-item-section>
-            </q-item>
-          </template>
-        </q-select>
-
-        <div v-if="$q.screen.gt.sm" class="GL__toolbar-link q-ml-xs q-gutter-md text-body2 text-weight-bold row items-center no-wrap">
-          <a href="https://github.com/vernaillen" target="_blank" class="text-white" rel="noopener noreferrer">
-            GitHub
-          </a>
-        </div>
 
         <q-space />
 
-        <div class="q-pl-sm q-gutter-sm row items-center no-wrap">
+        <div class="q-pl-sm q-pt-sm q-gutter-sm row items-center no-wrap">
           <q-btn v-if="$q.screen.gt.xs" dense flat round size="sm" icon="notifications" @click="openUrl('/#/blog')" />
           <q-btn v-if="$q.screen.gt.xs" dense flat>
             <div class="row items-center no-wrap">
@@ -135,7 +82,7 @@
 
       </div>
 
-      <nav class="hx_reponav reponav js-repo-nav js-sidenav-container-pjax clearfix container-lg px-3" itemscope="" itemtype="http://schema.org/BreadcrumbList" aria-label="Repository" data-pjax="#js-repo-pjax-container">
+      <nav class="hx_reponav reponav js-repo-nav js-sidenav-container-pjax clearfix container-lg px-3 " itemscope="" itemtype="http://schema.org/BreadcrumbList" aria-label="Repository" data-pjax="#js-repo-pjax-container">
         <a :class="navItemClass('/home')" href="/#/home">
           <div class="d-inline"><q-icon name="fas fa-house-damage"></q-icon></div>
           Home
@@ -148,11 +95,11 @@
           <div class="d-inline"><q-icon name="fas fa-blog"></q-icon></div>
           Blog
         </a>
-        <a :class="navItemClass('/about')"  href="/#/about">
+        <a :class="navItemClass('/page/about')"  href="/#/page/about">
           <div class="d-inline"><q-icon name="fas fa-male"></q-icon></div>
           About
         </a>
-        <a :class="navItemClass('/contact')"  href="/#/contact">
+        <a :class="navItemClass('/page/contact')"  href="/#/page/contact">
           <div class="d-inline"><q-icon name="fas fa-envelope-square"></q-icon></div>
           Contact
         </a>
