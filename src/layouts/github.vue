@@ -87,27 +87,32 @@
 
         <div class="row full-width">
           <nav class="page-nav">
-            <a :class="navItemClass('/home')" href="/#/home">
+            <router-link :class="navItemClass('/home')" to="/home">
               <q-icon name="fas fa-house-damage"></q-icon> Home
-            </a>
-            <a :class="navItemClass('/career')" href="/#/career">
+            </router-link>
+            <router-link :class="navItemClass('/career')" to="/career">
               <q-icon name="fas fa-briefcase"></q-icon> Career
-            </a>
-            <a :class="navItemClass('/blog')" href="/#/blog">
+            </router-link>
+            <router-link :class="navItemClass('/blog')" to="/blog">
               <q-icon name="fas fa-blog"></q-icon> Blog
-            </a>
-            <a :class="navItemClass('/page/about')"  href="/#/page/about">
+            </router-link>
+            <router-link :class="navItemClass('/page/about')" to="/page/about">
               <q-icon name="fas fa-male"></q-icon> About
-            </a>
-            <a :class="navItemClass('/page/contact')"  href="/#/page/contact">
+            </router-link>
+            <router-link :class="navItemClass('/page/contact')" to="/page/contact">
               <q-icon name="fas fa-envelope-square"></q-icon> Contact
-            </a>
+            </router-link>
           </nav>
         </div>
       </div>
     </div>
     <q-page-container>
-      <router-view />
+      <transition :name="transitionName" mode="out-in">
+        <router-view :key="$route.fullPath" />
+      </transition>
+      <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
+        <q-btn fab icon="fas fa-long-arrow-alt-up" class="shadow-4" color="primary" alt="Back to top" aria-label="Back to top" />
+      </q-page-scroller>
     </q-page-container>
 
     <q-footer class="bg-secondary text-grey-3 shadow-up-4 text-center q-pa-sm">
@@ -134,7 +139,8 @@ export default {
     return {
       text: '',
       options: null,
-      filteredOptions: []
+      filteredOptions: [],
+      transitionName: 'slide-left'
     }
   },
 
@@ -214,7 +220,7 @@ export default {
         padding: 3px
 
     .pageheader-actions
-      margin-top: 0
+      margin-top: 6px
       li
         font-size: 11px
         color: #24292e
@@ -259,6 +265,24 @@ export default {
     .page-nav::before
       display: table
       content: ""
+
+  .slide-left-enter-active,
+  .slide-left-leave-active,
+  .slide-right-enter-active,
+  .slide-right-leave-active
+    transition-duration: 0.2s
+    transition-property: opacity, transform
+    overflow: hidden
+
+  .slide-left-enter,
+  .slide-right-leave-active
+    opacity: 0.5
+    transform: translate(2em, 0)
+
+  .slide-left-leave-active,
+  .slide-right-enter
+    opacity: 0.5
+    transform: translate(-2em, 0)
 
   .q-page-container
     padding-top: 0 !important
