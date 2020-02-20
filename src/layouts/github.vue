@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHr lpR fFr">
     <q-header elevated class="text-white" style="background: #24292e" height-hint="61.59">
-      <q-toolbar class="q-pb-md q-px-md max1024">
+      <q-toolbar class="q-pb-md q-px-md page-container">
         <logo/>
 
         <q-space />
@@ -49,61 +49,62 @@
       </q-toolbar>
     </q-header>
 
-    <div class="pagehead repohead hx_repohead readability-menu bg-gray-light pb-0 pt-3  pb-0">
+    <div class="pageheader">
 
-      <div class="container-lg mb-4 px-3 d-flex">
+      <div class="page-container q-px-md">
 
-        <div class="flex-auto min-width-0 width-fit mr-3">
-          <h1 class="public  d-flex flex-wrap flex-items-center break-word float-none ">
-            <svg class="octicon octicon-repo" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path></svg>
-            <span class="author ml-1 flex-self-stretch" itemprop="author">
-              <a class="url fn" rel="author" href="https://github.com/vernaillen">vernaillen</a>
-            </span>
-            <span class="path-divider flex-self-stretch">/</span>
-            <strong itemprop="name" class="mr-2 flex-self-stretch">
-              <a data-pjax="#js-repo-pjax-container" href="https://github.com/vernaillen/vernaillen-website">vernaillen-website</a>
-            </strong>
+        <div class="row full-width">
 
-          </h1>
+          <div class="col">
+            <div class="repo-nav">
+              <svg class="repo-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path>
+              </svg>
+              <span class="author" itemprop="author">
+                <a rel="author" title="got to my GitHub account" href="https://github.com/vernaillen">vernaillen</a>
+              </span>
+              <span class="path-divider">/</span>
+              <strong itemprop="name">
+                <a title="check out this website's git repository" href="https://github.com/vernaillen/vernaillen-website">vernaillen-website</a>
+              </strong>
+            </div>
+          </div>
+
+          <div class="col justify-end">
+            <ul class="pageheader-actions float-right">
+              <li>
+                <q-btn title="Fork your own copy of vernaillen/vernaillen-website to your account"  @click="openUrl('https://github.com/vernaillen/vernaillen-website')">
+                  <svg class="octicon octicon-repo-forked v-align-text-bottom" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8 1a1.993 1.993 0 00-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 002 1a1.993 1.993 0 00-1 3.72V6.5l3 3v1.78A1.993 1.993 0 005 15a1.993 1.993 0 001-3.72V9.5l3-3V4.72A1.993 1.993 0 008 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path>
+                  </svg>
+                  Fork
+                </q-btn>
+              </li>
+            </ul>
+          </div>
+
         </div>
 
-        <ul class="pagehead-actions flex-shrink-0">
-          <li>
-            <details class="details-reset details-overlay details-overlay-dark d-inline-block float-left">
-              <summary clickable class="btn btn-sm" title="Fork your own copy of vernaillen/vernaillen-website to your account" role="button" @click="openUrl('https://github.com/vernaillen/vernaillen-website')">
-                <svg class="octicon octicon-repo-forked v-align-text-bottom" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M8 1a1.993 1.993 0 00-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 002 1a1.993 1.993 0 00-1 3.72V6.5l3 3v1.78A1.993 1.993 0 005 15a1.993 1.993 0 001-3.72V9.5l3-3V4.72A1.993 1.993 0 008 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path>
-                </svg>
-                Fork
-              </summary>
-            </details>
-          </li>
-        </ul>
-
+        <div class="row full-width">
+          <nav class="page-nav">
+            <a :class="navItemClass('/home')" href="/#/home">
+              <q-icon name="fas fa-house-damage"></q-icon> Home
+            </a>
+            <a :class="navItemClass('/career')" href="/#/career">
+              <q-icon name="fas fa-briefcase"></q-icon> Career
+            </a>
+            <a :class="navItemClass('/blog')" href="/#/blog">
+              <q-icon name="fas fa-blog"></q-icon> Blog
+            </a>
+            <a :class="navItemClass('/page/about')"  href="/#/page/about">
+              <q-icon name="fas fa-male"></q-icon> About
+            </a>
+            <a :class="navItemClass('/page/contact')"  href="/#/page/contact">
+              <q-icon name="fas fa-envelope-square"></q-icon> Contact
+            </a>
+          </nav>
+        </div>
       </div>
-
-      <nav class="hx_reponav reponav js-repo-nav js-sidenav-container-pjax clearfix container-lg px-3 " itemscope="" itemtype="http://schema.org/BreadcrumbList" aria-label="Repository" data-pjax="#js-repo-pjax-container">
-        <a :class="navItemClass('/home')" href="/#/home">
-          <div class="d-inline"><q-icon name="fas fa-house-damage"></q-icon></div>
-          Home
-        </a>
-        <a :class="navItemClass('/career')" href="/#/career">
-          <div class="d-inline"><q-icon name="fas fa-briefcase"></q-icon></div>
-          Career
-        </a>
-        <a :class="navItemClass('/blog')" href="/#/blog">
-          <div class="d-inline"><q-icon name="fas fa-blog"></q-icon></div>
-          Blog
-        </a>
-        <a :class="navItemClass('/page/about')"  href="/#/page/about">
-          <div class="d-inline"><q-icon name="fas fa-male"></q-icon></div>
-          About
-        </a>
-        <a :class="navItemClass('/page/contact')"  href="/#/page/contact">
-          <div class="d-inline"><q-icon name="fas fa-envelope-square"></q-icon></div>
-          Contact
-        </a>
-      </nav>
     </div>
     <q-page-container>
       <router-view />
@@ -173,7 +174,7 @@ export default {
       })
     },
     navItemClass (link) {
-      let itemClass = 'js-selected-navigation-item reponav-item'
+      let itemClass = 'page-nav-item'
       if (this.$route.path.startsWith(link)) {
         itemClass += ' selected'
       }
@@ -187,23 +188,80 @@ export default {
 </script>
 
 <style lang="sass">
-  .pagehead
+  .pageheader
     padding-top: 80px !important
+    position: relative
+    padding-top: 24px
+    padding-bottom: 0
+    margin-bottom: 24px
+    border-bottom: 1px solid #e1e4e8
+
+    svg
+      margin-right: 5px
+
+    .repo-nav
+      font-size: 16px
+      color: #959da5
+      .repo-icon
+        fill: currentColor
+        margin-bottom: -4px
+      a
+        color: #0366d6
+        text-decoration: none
+      a:hover
+        text-decoration: underline
+      .path-divider
+        padding: 3px
+
+    .pageheader-actions
+      margin-top: 0
+      li
+        font-size: 11px
+        color: #24292e
+        list-style-type: none
+        .q-btn
+          background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%)
+          font-size: 12px
+          line-height: 20px
+          text-transform: none
+          .q-btn__wrapper
+            padding: 3px 10px
+
+    .page-nav
+      position: relative
+      top: 1px
+      margin-top: -5px
+      .page-nav-item
+        padding: 7px 12px 8px !important
+        float: left
+        color: #586069
+        white-space: nowrap
+        border: 1px solid transparent
+        border-top-color: transparent
+        border-top-style: solid
+        border-top-width: 1px
+        border-right-color: transparent
+        border-bottom-color: transparent
+        border-left-color: transparent
+        border-top: 3px solid transparent
+        border-top-color: transparent
+        border-radius: 3px 3px 0 0
+        text-decoration: none
+        .q-icon
+          margin-bottom: 3px
+          margin-right: 5px
+          color: #666
+      .page-nav-item.selected
+        border-color: #1bbc9b #e1e4e8 transparent
+        color: #24292e
+        background-color: #fff
+    .page-nav::after,
+    .page-nav::before
+      display: table
+      content: ""
 
   .q-page-container
     padding-top: 0 !important
-
-  .reponav-item
-    .q-icon
-      margin-bottom: 3px
-      margin-right: 5px
-      color: #666
-
-  .reponav-item.selected
-    border-color: #1bbc9b #e1e4e8 transparent
-
-  summary.btn a
-    color: #24292e
 
   .GL
     &__select-GL__menu-link

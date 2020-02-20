@@ -1,8 +1,8 @@
 <template>
-  <q-page padding class="max1024 q-pa-md">
+  <q-page padding class="page-container q-pa-md">
       <div class="row q-col-gutter-lg">
         <div class="col-12 col-md-6" v-for="(post, index) in blogPosts" :key="index">
-          <q-card class="">
+          <q-card>
             <q-card-section class="card-title">
               {{post.attributes.title}}
               <span class="float-right">
@@ -46,11 +46,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass">
-  .q-card
-    .q-card__section.card-title
-      padding: 12px
-      background-color: #f6f8fa
-      border-bottom: 1px solid #d1d5da
-</style>

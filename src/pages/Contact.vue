@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="max1024">
+  <q-page padding class="page-container">
 
     <summary class="btn btn-sm css-truncate" role="button">
       <em>Branch:</em>

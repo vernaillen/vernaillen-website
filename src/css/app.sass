@@ -1,7 +1,5 @@
 // app global css in Sass form
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Mono')
-@import url('https://github.githubassets.com/assets/frameworks-6548d5a1dd84bd83036c6a914b25b4ae.css')
-@import url('https://github.githubassets.com/assets/github-0aa399409f5b0b7b21dad8aaa2f2edf2.css')
 
 $body-bg    : #ffffff
 $text-color : #333333
@@ -24,12 +22,21 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
   line-height: 1.6
 
 
-.max1024
+.page-container
   max-width: 1024px
   margin-left: auto
   margin-right: auto
 
-.max1280
-  max-width: 1280px
-  margin-left: auto
-  margin-right: auto
+
+.q-card
+  .q-card__section.card-title
+    padding: 12px
+    background-color: #f6f8fa
+    border-bottom: 1px solid #d1d5da
+    .edit-icon
+      color: #586069
+      margin-top: -5px
+      .q-btn__wrapper
+        padding: 4px 10px
+      .q-icon, .q-btn .q-spinner
+        font-size: 1em
