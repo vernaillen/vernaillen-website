@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <page-header :title="markdown.attributes.title" :currentPageName="currentPageName" :isBlogPost="markdown.isBlogPost" />
-    <div class="page-container">
+    <div class="page-container q-pa-md">
       <q-card>
         <q-card-section class="card-title">
           <span v-if="markdown.isBlogPost">{{markdown.displayDate}}</span>

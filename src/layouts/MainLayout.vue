@@ -51,7 +51,7 @@
               behavior="mobile"
               elevated
               content-class="bg-grey-1">
-      <q-toolbar id="menu-toolbar"/>
+      <q-toolbar id="menu-toolbar" style="height: 66px"/>
       <q-list>
         <q-separator></q-separator>
         <div>
@@ -83,8 +83,12 @@
       </q-page-scroller>
     </q-page-container>
 
-    <q-footer class="bg-secondary text-grey-3 shadow-up-4 text-center q-pa-sm">
-      Powered by <a href="https://vuejs.org" target="_blank" rel="noopener noreferrer"><img alt="Vue" src="https://vuejs.org/images/logo.png" style="height: 20px;margin-bottom: -5px; margin-right: 25px"/></a>  © 2020 Vernaillen Consulting
+    <q-footer class="bg-secondary text-grey-4 shadow-up-4 text-center q-pa-sm">
+      Powered by
+      <a href="https://vuejs.org" target="_blank" rel="noopener noreferrer">
+        <img alt="Vue" src="https://vuejs.org/images/logo.png" />
+      </a>
+      © 2020 Vernaillen Consulting
     </q-footer>
   </q-layout>
 </template>
@@ -167,4 +171,14 @@ export default {
   .fade-enter,
   .fade-leave-active
     opacity: 0
+
+  footer
+    font-size: 90%
+    height: 40px
+    a
+      margin-right: 15px
+      img
+        height: 18px
+        margin-bottom: -5px
+
 </style>
