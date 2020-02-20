@@ -1,5 +1,6 @@
 <template>
-  <q-page padding class="flex flex-center" >
+  <q-page >
+    <page-header title="Wouter's career timeline" currentUrl="/#/career" currentPageName="Career" />
     <q-timeline layout="loose" color="primary">
       <q-timeline-entry
         title="Kind en Gezin"
@@ -106,8 +107,13 @@
 </template>
 
 <script>
+import PageHeader from '../components/PageHeader'
+
 export default {
-  name: 'Career'
+  name: 'Career',
+  components: {
+    PageHeader
+  }
 }
 </script>
 

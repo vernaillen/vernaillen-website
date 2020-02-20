@@ -1,21 +1,51 @@
 <template>
   <q-layout view="hHr lpR fFr">
-    <q-header class="bg-white text-grey-9 shadow-4">
-      <q-toolbar>
-        <logo/>
-        <q-space/>
-        <q-btn dense flat round icon="fas fa-bars" @click="showMenu = !showMenu" alt="Toggle menu" aria-label="Toggle menu" />
-      </q-toolbar>
-      <q-toolbar>
-        <q-breadcrumbs separator="" gutter="lg">
-          <q-breadcrumbs-el :to="previousPagePath" icon="fas fa-backward" />
-          <q-breadcrumbs-el :label="$store.state.common.currentPageName" :icon="currentPageIcon" class="text-black" />
-          <q-breadcrumbs-el :to="nextPagePath" icon="fas fa-forward" class="text-primary" />
-        </q-breadcrumbs>
+    <q-header elevated class="text-dark" style="background: white" height-hint="61.59">
+      <q-toolbar class="q-pb-md page-container">
+        <q-btn
+          v-if="$q.screen.lt.sm"
+          class="q-pt-md q-pl-sm"
+          dense flat round
+          icon="fas fa-bars"
+          alt="Toggle menu" aria-label="Toggle menu"
+          @click="showDrawer = !showDrawer"
+        />
+        <logo />
+        <q-space />
+        <nav v-if="!$q.screen.lt.sm" class="page-nav">
+          <router-link :class="navItemClass('/home')" to="/home">
+            Home
+          </router-link>
+          <router-link :class="navItemClass('/career')" to="/career">
+            Career
+          </router-link>
+          <router-link :class="navItemClass('/blog')" to="/blog">
+            Blog
+          </router-link>
+          <router-link :class="navItemClass('/page/about')" to="/page/about">
+            About
+          </router-link>
+          <router-link :class="navItemClass('/page/contact')" to="/page/contact">
+            Contact
+          </router-link>
+        </nav>
+        <div class="justify-end">
+          <ul class="toolbar-actions float-right">
+            <li>
+              <q-btn title="Fork your own copy of vernaillen/vernaillen-website to your account"  @click="openUrl('https://github.com/vernaillen/vernaillen-website')">
+                <svg class="octicon octicon-repo-forked v-align-text-bottom" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M8 1a1.993 1.993 0 00-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 002 1a1.993 1.993 0 00-1 3.72V6.5l3 3v1.78A1.993 1.993 0 005 15a1.993 1.993 0 001-3.72V9.5l3-3V4.72A1.993 1.993 0 008 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path>
+                </svg>
+                Fork
+              </q-btn>
+            </li>
+          </ul>
+        </div>
       </q-toolbar>
     </q-header>
-    <q-drawer v-model="showMenu"
-              side="right"
+
+    <q-drawer v-model="showDrawer"
+              side="left"
               :width="250"
               :breakpoint="500"
               behavior="mobile"
@@ -24,25 +54,29 @@
       <q-toolbar id="menu-toolbar"/>
       <q-list>
         <q-separator></q-separator>
-        <div v-for="(page, index) in pages" :key="index">
-          <q-item :to="page.path" clickable v-ripple :area-label="'Go to' + page.name" active-class="text-black q-item--active">
-            <q-item-section avatar>
-              <q-icon class="text-primary" :name="page.icon" />
-            </q-item-section>
-            <q-item-section>{{page.name}}</q-item-section>
+        <div>
+          <q-item to="/home" clickable v-ripple :area-label="'Go to home'" active-class="text-black q-item--active">
+            <q-item-section>Home</q-item-section>
           </q-item>
-          <q-separator></q-separator>
+          <q-item to="/career" clickable v-ripple :area-label="'Go to home'" active-class="text-black q-item--active">
+            <q-item-section>Career</q-item-section>
+          </q-item>
+          <q-item to="/blog" clickable v-ripple :area-label="'Go to home'" active-class="text-black q-item--active">
+            <q-item-section>Blog</q-item-section>
+          </q-item>
+          <q-item to="/page/about" clickable v-ripple :area-label="'Go to home'" active-class="text-black q-item--active">
+            <q-item-section>About</q-item-section>
+          </q-item>
+          <q-item to="/page/contact" clickable v-ripple :area-label="'Go to home'" active-class="text-black q-item--active">
+            <q-item-section>Contact</q-item-section>
+          </q-item>
         </div>
       </q-list>
     </q-drawer>
 
-    <q-page-container
-      v-touch-swipe.mouse.left="swipeLeft"
-      v-touch-swipe.mouse.right="swipeRight"
-      style="overflow: hidden"
-      class="justify-center">
-      <transition :name="transitionName" mode="out-in">
-        <router-view />
+    <q-page-container class="page-wrapper">
+      <transition name="fade" mode="out-in">
+        <router-view :key="$route.fullPath" />
       </transition>
       <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
         <q-btn fab icon="fas fa-long-arrow-alt-up" class="shadow-4" color="primary" alt="Back to top" aria-label="Back to top" />
@@ -52,7 +86,6 @@
     <q-footer class="bg-secondary text-grey-3 shadow-up-4 text-center q-pa-sm">
       Powered by <a href="https://vuejs.org" target="_blank" rel="noopener noreferrer"><img alt="Vue" src="https://vuejs.org/images/logo.png" style="height: 20px;margin-bottom: -5px; margin-right: 25px"/></a>  © 2020 Vernaillen Consulting
     </q-footer>
-
   </q-layout>
 </template>
 
@@ -60,146 +93,78 @@
 import Logo from '../components/Logo'
 
 export default {
-  name: 'LayoutDefault',
+  name: 'MyLayout',
   components: {
     Logo
   },
-  props: {
-    pathMatch: String
-  },
   data () {
     return {
-      showMenu: false,
-      prevHeight: 0,
-      pages: this.$store.state.common.pages,
-      nrOfPages: this.$store.state.common.nrOfPages,
-      showBreadcrumb: false,
-      transitionName: 'slide-left'
-    }
-  },
-  created () {
-    this.$router.beforeEach((to, from, next) => {
-      const fromPos = this.getPagePosition(from.name)
-      const toPos = this.getPagePosition(to.name)
-      let transitionName = toPos < fromPos ? 'slide-right' : 'slide-left'
-      if (toPos === 0 && fromPos === this.nrOfPages) {
-        transitionName = 'slide-left'
-      } else if (toPos === this.nrOfPages && fromPos === 0) {
-        transitionName = 'slide-right'
-      }
-      this.transitionName = transitionName || 'slide-left'
-      this.$store.commit('common/currentBlogPostName', '')
-      next()
-    })
-    this.$router.afterEach((to, from, next) => {
-      this.setCurrentPageName(to.path)
-    })
-    this.setCurrentPageName(this.$route.path)
-  },
-  computed: {
-    nextPagePath () {
-      let nextPos = 1
-      if (this.$store.state.common.currentPageName !== '') {
-        const currentPos = this.getPagePosition(this.$store.state.common.currentPageName)
-        nextPos = currentPos + 1
-        if (nextPos >= this.nrOfPages) {
-          nextPos = 0
-        }
-      }
-      return this.$store.state.common.pages[nextPos].path
-    },
-    previousPagePath () {
-      let nextPos = this.nrOfPages - 1
-      if (this.$store.state.common.currentPageName !== '') {
-        const currentPos = this.getPagePosition(this.$store.state.common.currentPageName)
-        nextPos = currentPos - 1
-        if (nextPos < 0) {
-          nextPos = this.nrOfPages - 1
-        }
-      }
-      return this.$store.state.common.pages[nextPos].path
-    },
-    currentPageIcon () {
-      for (let i = 0; i < this.nrOfPages; i++) {
-        if (this.$store.state.common.pages[i].name === this.$store.state.common.currentPageName) {
-          return this.$store.state.common.pages[i].icon
-        }
-      }
-      return 'fas fa-home'
-    },
-    isBlogPost () {
-      return this.$store.state.common.currentPageName === 'Blog'
+      showDrawer: false
     }
   },
   methods: {
-    swipeLeft () {
-      this.$router.push(this.nextPagePath)
-    },
-    swipeRight () {
-      this.$router.push(this.previousPagePath)
-    },
-    getPagePosition (pageName) {
-      for (let i = 0; i < this.nrOfPages; i++) {
-        if (this.$store.state.common.pages[i].name === pageName) {
-          return i
-        }
+    navItemClass (link) {
+      let itemClass = 'page-nav-item'
+      if (this.$route.path.startsWith(link)) {
+        itemClass += ' selected'
       }
+      return itemClass
     },
-    setCurrentPageName (path) {
-      let pageName = 'Home'
-      if (typeof path !== 'undefined' && path !== '') {
-        for (let i = 0; i < this.nrOfPages; i++) {
-          if (this.$store.state.common.pages[i].path === path) {
-            pageName = this.$store.state.common.pages[i].name
-          }
-        }
-      }
-      this.$store.commit('common/currentPageName', pageName)
+    openUrl (url) {
+      window.location.href = url
     }
   }
 }
 </script>
 
-<style type="scss">
-  .q-breadcrumbs {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .q-breadcrumbs--last a {
-    pointer-events: inherit;
-  }
+<style lang="sass">
 
-  .q-item.q-router-link--active,
-  .q-item--active {
-    background-color: #ddd;
-  }
+  .q-toolbar
+    .page-nav
+      position: relative
+      .page-nav-item
+        padding: 14px 12px 7px !important
+        float: left
+        color: #586069
+        white-space: nowrap
+        border-top: 5px solid transparent
+        border-top-color: transparent
+        text-decoration: none
+        .q-icon
+          margin-bottom: 3px
+          margin-right: 5px
+          color: #666
+      .page-nav-item.selected
+        border-color: $primary #e1e4e8 transparent
+        color: #24292e
+        background-color: #fff
+    .page-nav::after,
+    .page-nav::before
+      display: table
+      content: ""
+    .toolbar-actions
+      margin: 14px 0 0 0
+      svg
+        margin-right: 5px
+      li
+        font-size: 11px
+        color: #24292e
+        list-style-type: none
+        .q-btn
+          background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%)
+          font-size: 12px
+          line-height: 20px
+          text-transform: none
+          .q-btn__wrapper
+            padding: 3px 10px
 
-  .q-item.q-router-link--active .q-icon,
-  .q-item--active .q-icon {
-    color: black !important;
-  }
-  #menu-toolbar {
-    height: 100px;
-  }
+  .fade-enter-active,
+  .fade-leave-active
+    transition-duration: 0.1s
+    transition-property: opacity
+    transition-timing-function: ease
 
-  .slide-left-enter-active,
-  .slide-left-leave-active,
-  .slide-right-enter-active,
-  .slide-right-leave-active {
-    transition-duration: 0.2s;
-    transition-property: opacity, transform;
-    overflow: hidden;
-  }
-
-  .slide-left-enter,
-  .slide-right-leave-active {
-    opacity: 0.5;
-    transform: translate(2em, 0);
-  }
-
-  .slide-left-leave-active,
-  .slide-right-enter {
-    opacity: 0.5;
-    transform: translate(-2em, 0);
-  }
+  .fade-enter,
+  .fade-leave-active
+    opacity: 0
 </style>

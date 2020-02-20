@@ -2,7 +2,7 @@ import Vue from 'vue'
 import fm from 'front-matter'
 import moment from 'moment'
 
-const blogpostFolder = 'blogposts/'
+const blogpostFolder = 'blog/'
 function kebabCase (str) {
   const result = str.replace(
     /[A-Z\u00C0-\u00D6\u00D8-\u00DE]/g,
@@ -48,6 +48,6 @@ for (const index in markdownFiles) {
     markdownFiles[index].body = fmContent.body
     markdownFiles[index].attributes = fmContent.attributes
     markdownFiles[index].sortingDate = moment(String(markdownFiles[index].attributes.date)).format('YYYYMMDD')
-    markdownFiles[index].displayDate = moment(String(markdownFiles[index].attributes.date)).format('DD/MM/YYYY')
+    markdownFiles[index].displayDate = moment(String(markdownFiles[index].attributes.date)).format('DD MMM YYYY')
   })
 }

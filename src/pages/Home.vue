@@ -27,7 +27,7 @@ export default {
 
 <style scoped>
   .q-carousel {
-    height: calc(100vh - 140px);
+    height: calc(100vh - 106px);
   }
   .q-carousel__slide {
     padding: 0;
@@ -69,7 +69,6 @@ export default {
     margin: 0 0 30px 0;
   }
   .slide .slide-header p {
-    font-family: 'Roboto Mono',monospace;
     font-weight: 400;
     line-height: 1.6;
   }
