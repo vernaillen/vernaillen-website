@@ -8,6 +8,8 @@ tag:
 - quasar
 - zeit
 - now
+- markdown
+- all
 author: Wouter
 location: Zottegem
 ---

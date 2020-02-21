@@ -4,7 +4,8 @@ desc: This is the documentation for QMarkdown
 date: 01/06/2019
 tag:
 - frontmatter
-- vuepress
+- markdown
+- all
 author: Wouter
 location: Zottegem
 ---

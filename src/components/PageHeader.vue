@@ -17,7 +17,10 @@
               <a href="/#/blog">Blog</a>
               <span class="path-divider">/</span>
             </template>
-            {{currentPageName}}
+            <template v-if="isTagPage">
+              <q-icon name="fas fa-tag"/>
+            </template>
+            {{pageName}}
           </div>
         </div>
       </div>
@@ -32,6 +35,18 @@ export default {
     title: String,
     currentPageName: String,
     isBlogPost: Boolean
+  },
+  computed: {
+    pageName () {
+      if (this.isTagPage) {
+        return this.currentPageName.substring(5)
+      } else {
+        return this.currentPageName
+      }
+    },
+    isTagPage () {
+      return this.currentPageName.startsWith('tag:')
+    }
   }
 }
 </script>

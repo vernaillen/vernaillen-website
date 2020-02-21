@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page class="markdown-page">
     <page-header :title="markdown.attributes.title" :currentPageName="currentPageName" :isBlogPost="markdown.isBlogPost" />
     <div v-if="markdown.isBlogPost" class="page-container q-pa-md">
       <div class="row q-col-gutter-lg">
@@ -12,25 +12,32 @@
         </div>
         <div class="col-12 col-md-3">
           <q-card>
-            <q-card-section class="blog-meta">
-              <q-icon name="far fa-user"/> {{markdown.attributes.author}}<br/>
-              <q-icon name="far fa-calendar"/> {{markdown.displayDate}}<br/>
-              <q-icon name="fas fa-map-marker-alt"/> {{markdown.attributes.location}}<br/>
-              <br/>
-              <div v-for="(tag, index) in markdown.attributes.tag" :key="index">
-                <q-icon name="fas fa-tag"/> {{tag}}<br/>
+            <q-card-section class="post-meta-section">
+              <div class="row">
+                <div class="col-6 col-md-12 post-meta-1">
+                  <span class="post-meta"><q-icon name="far fa-user"/> {{markdown.attributes.author}}</span>
+                  <span class="post-meta"><q-icon name="far fa-calendar"/> {{markdown.displayDate}}</span>
+                  <span class="post-meta"><q-icon name="fas fa-map-marker-alt"/> {{markdown.attributes.location}}</span>
+                </div>
+                <div class="col-6 col-md-12 post-meta-2">
+                  <blog-post-tags :tags="markdown.attributes.tag"/>
+                </div>
               </div>
-              <br/>
-              <q-btn :to="prev"
-                     :disable="prev === ''"
-                     icon="fas fa-backward"
-                     color="secondary"/>
-              <q-btn to="/blog"
-                     icon="fas fa-level-up-alt"/>
-              <q-btn :to="next"
-                     :disable="next === ''"
-                     icon="fas fa-forward"
-                     color="secondary"/>
+              <div class="row blog-nav-buttons">
+                <q-btn :to="prev"
+                       :disable="prev === ''"
+                       class="prev"
+                       icon="fas fa-backward"
+                       color="secondary"/>
+                <q-btn to="/blog"
+                       class="up"
+                       icon="fas fa-level-up-alt"/>
+                <q-btn :to="next"
+                       :disable="next === ''"
+                       class="next"
+                       icon="fas fa-forward"
+                       color="secondary"/>
+              </div>
             </q-card-section>
           </q-card>
         </div>
@@ -47,17 +54,19 @@
 </template>
 
 <script>
-import PageHeader from '../components/PageHeader'
 import { markdownFiles } from '../load-markdown-files'
 import notFound from '../markdown/notFound.md'
+import PageHeader from '../components/PageHeader'
+import BlogPostTags from '../components/BlogPostTags'
 
 export default {
-  name: 'Blog',
+  name: 'MarkdownPage',
   props: {
     pathMatch: String
   },
   components: {
-    PageHeader
+    PageHeader,
+    BlogPostTags
   },
   data () {
     return {
@@ -71,7 +80,7 @@ export default {
           return this.markdownFiles[i]
         }
       }
-      return { title: '404', content: notFound, isBlogPost: false }
+      return { title: '404', body: notFound, isBlogPost: false }
     },
     blogPosts () {
       return this.markdownFiles.filter(md => {
@@ -119,9 +128,27 @@ export default {
 </script>
 
 <style lang="sass">
-  .blog-meta
-    .q-btn
-      margin-right: 14px
-    .q-btn:last-child
-      margin-right: 0px
+  .markdown-page
+    .post-meta-section
+      position: relative
+      .q-btn
+        position: absolute
+        bottom: 16px
+      .q-btn.prev
+        left: 16px
+      .q-btn.up
+        left: 50%
+        transform: translate(-50%, 0)
+      .q-btn.next
+        right: 16px
+    .blog-nav-buttons
+      height: 70px
+
+    @media (min-width: 1024px)
+      .q-card
+        .post-meta-section
+          .post-meta-1
+            .post-meta
+              display: block
+              padding-bottom: 5px
 </style>
