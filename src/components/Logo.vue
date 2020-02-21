@@ -16,9 +16,9 @@ export default {
   computed: {
     logoClass () {
       if (this.$q.screen.lt.sm) {
-        return 'logo-centered'
+        return 'wv-logo logo-centered'
       }
-      return ''
+      return 'wv-logo'
     }
   }
 }
@@ -29,9 +29,11 @@ export default {
     height: 50px
     width: 120px
 
-  .logo-centered
+  .wv-logo
     position: absolute
     top: 0
+
+  .logo-centered
     left: 50%
     transform: translate(-50%, 0)
 </style>

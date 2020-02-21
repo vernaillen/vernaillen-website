@@ -13,16 +13,13 @@ Because I wanted to learn more about Vue I decided to rewrite my website using V
 
 Here's how I did it:
 
-## Vue
+## Vue & Quasar
 
 
-
-## Quasar
-
+## Markdown & FrontMatter
 
 
-## Markdown
+## Zeit & Now
 
 
-
-## FrontMatter
+## Circle CI

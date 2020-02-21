@@ -27,7 +27,7 @@ export default {
 
 <style scoped>
   .q-carousel {
-    height: calc(100vh - 106px);
+    height: calc(100vh - 101px);
   }
   .q-carousel__slide {
     padding: 0;
