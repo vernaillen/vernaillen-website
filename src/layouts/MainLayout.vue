@@ -11,7 +11,7 @@
         />
         <logo />
         <q-space />
-        <page-nav isDrawer="false" v-if="!$q.screen.lt.sm"/>
+        <page-nav isDrawer=false v-if="!$q.screen.lt.sm"/>
         <div class="justify-end">
           <toolbar-actions/>
         </div>
@@ -30,7 +30,7 @@
       </q-toolbar>
       <q-list>
         <q-separator/>
-        <page-nav isDrawer="true" />
+        <page-nav isDrawer=true />
       </q-list>
     </q-drawer>
 

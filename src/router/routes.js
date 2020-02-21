@@ -9,7 +9,6 @@ const routes = [
       { path: '/blog', component: () => import('pages/BlogOverview.vue') },
       { path: '/blog/*', component: () => import('pages/MarkdownPage.vue'), props: true },
       { path: '/page/*', component: () => import('pages/MarkdownPage.vue'), props: true },
-      { path: '/badges', component: () => import('pages/Badges.vue'), props: true },
       { path: '', redirect: '/home' }
     ]
   }

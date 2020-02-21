@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <page-header title="Wouter's career timeline" currentUrl="/#/career" currentPageName="Career" />
+    <page-header title="Career timeline" currentUrl="/#/career" currentPageName="Career" />
     <div class="page-container q-px-md">
       <q-timeline :layout="layout" color="primary">
         <q-timeline-entry

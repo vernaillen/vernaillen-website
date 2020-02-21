@@ -1,11 +1,12 @@
 <template>
   <nav class="page-nav">
     <q-list>
-      <page-nav-item title="Home" url="/home" :isDrawer="isDrawer"/>
-      <page-nav-item title="Career" url="/career" :isDrawer="isDrawer"/>
-      <page-nav-item title="Blog" url="/blog" :isDrawer="isDrawer"/>
-      <page-nav-item title="About" url="/page/about" :isDrawer="isDrawer"/>
-      <page-nav-item title="Contact" url="/page/contact" :isDrawer="isDrawer"/>
+      <page-nav-item title="Home" url="/home"/>
+      <page-nav-item title="Career" url="/career"/>
+      <page-nav-item title="Skills" url="/page/skills"/>
+      <page-nav-item title="Blog" url="/blog"/>
+      <page-nav-item title="About" url="/page/about"/>
+      <page-nav-item title="Contact" url="/page/contact"/>
     </q-list>
   </nav>
 </template>
@@ -15,9 +16,6 @@ import PageNavItem from './PageNavItem'
 
 export default {
   name: 'PageNav',
-  props: {
-    isDrawer: Boolean
-  },
   components: {
     PageNavItem
   }
