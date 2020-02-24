@@ -23,13 +23,13 @@
     "concurrently:dev:jest": "concurrently \"quasar dev\" \"jest --watch\""
   },
   "dependencies": {
-    "@quasar/extras": "^1.5.1",
-    "quasar": "^1.9.2",
+    "@quasar/extras": "^1.5.2",
+    "quasar": "^1.9.4",
     "vue-i18n": "^8.0.0",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
-    "@quasar/app": "^1.5.6",
+    "@quasar/app": "^1.5.8",
     "@quasar/quasar-app-extension-qmarkdown": "^1.0.23",
     "@quasar/quasar-app-extension-testing": "^1.0.0",
     "@quasar/quasar-app-extension-testing-unit-jest": "^1.0.0",
@@ -41,7 +41,7 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "eslint-plugin-vue": "^6.2.0",
+    "eslint-plugin-vue": "^6.2.1",
     "front-matter": "^3.1.0",
     "moment": "^2.24.0"
   },
