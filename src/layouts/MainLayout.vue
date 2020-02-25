@@ -1,49 +1,54 @@
 <template>
   <q-layout view="hHr lpR fFr">
-    <q-header elevated class="text-dark" height-hint="61">
-      <q-toolbar class="page-container">
-        <q-btn
-          v-if="$q.screen.lt.sm"
-          dense flat round
-          icon="fas fa-bars"
-          alt="Toggle menu" aria-label="Toggle menu"
-          @click="showDrawer = !showDrawer"
-        />
-        <logo />
-        <q-space />
-        <page-nav isDrawer=false v-if="!$q.screen.lt.sm"/>
-        <div class="justify-end">
-          <toolbar-actions/>
-        </div>
-      </q-toolbar>
-    </q-header>
+    <div id="pageWrapper" ref="pageWrapper">
+      <q-header elevated class="text-dark" height-hint="61">
+        <q-toolbar class="page-container">
+          <q-btn
+            v-if="$q.screen.lt.sm"
+            dense flat round
+            icon="fas fa-bars"
+            alt="Toggle menu" aria-label="Toggle menu"
+            @click="showDrawer = !showDrawer"
+          />
+          <logo />
+          <q-space />
+          <page-nav isDrawer=false v-if="!$q.screen.lt.sm"/>
+          <div class="justify-end">
+            <toolbar-actions/>
+          </div>
+        </q-toolbar>
+      </q-header>
 
-    <q-drawer v-model="showDrawer"
-              side="left"
-              :width="250"
-              :breakpoint="500"
-              behavior="mobile"
-              elevated
-              content-class="bg-grey-1">
-      <q-toolbar id="menu-toolbar">
-        <logo />
-      </q-toolbar>
-      <q-list>
-        <q-separator/>
-        <page-nav isDrawer=true />
-      </q-list>
-    </q-drawer>
+      <q-drawer v-model="showDrawer"
+                side="left"
+                :width="250"
+                :breakpoint="500"
+                behavior="mobile"
+                elevated
+                content-class="bg-grey-1">
+        <q-toolbar id="menu-toolbar">
+          <logo />
+        </q-toolbar>
+        <q-list>
+          <q-separator/>
+          <page-nav isDrawer=true />
+        </q-list>
+      </q-drawer>
 
-    <q-page-container class="page-wrapper">
-      <transition name="fade" mode="out-in">
-        <router-view :key="$route.fullPath" />
-      </transition>
-      <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
-        <q-btn fab icon="fas fa-long-arrow-alt-up" class="shadow-4" color="primary" alt="Back to top" aria-label="Back to top" />
-      </q-page-scroller>
-    </q-page-container>
+      <q-page-container class="page-wrapper">
+        <transition name="fade" mode="out-in">
+          <router-view :key="$route.fullPath" />
+        </transition>
+        <q-scroll-observer @scroll="onScroll" />
+        <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
+          <q-btn fab icon="fas fa-long-arrow-alt-up" class="shadow-4" color="primary" alt="Back to top" aria-label="Back to top" />
+        </q-page-scroller>
+      </q-page-container>
 
-    <my-footer />
+      <my-footer>
+        <q-linear-progress :value="progress" />
+      </my-footer>
+    </div>
   </q-layout>
 </template>
 
@@ -63,8 +68,22 @@ export default {
   },
   data () {
     return {
-      showDrawer: false
+      showDrawer: false,
+      scrollInfo: {},
+      progress: 0,
+      pageHeight: 0
     }
+  },
+  methods: {
+    onScroll (info) {
+      this.scrollInfo = info
+      this.progress = info.position / (this.pageHeight - this.$q.screen.height)
+    }
+  },
+  updated () {
+    this.$nextTick(function () {
+      this.pageHeight = this.$refs.pageWrapper.clientHeight
+    })
   }
 }
 </script>
@@ -84,4 +103,7 @@ export default {
   .fade-enter,
   .fade-leave-active
     opacity: 0
+
+  .q-linear-progress
+    height: 1.2em
 </style>

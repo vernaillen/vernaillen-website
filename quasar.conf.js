@@ -61,7 +61,9 @@ module.exports = function (ctx) {
         'QTimelineEntry',
         'QBreadcrumbs',
         'QBreadcrumbsEl',
-        'QSpace'
+        'QSpace',
+        'QLinearProgress',
+        'QScrollObserver'
       ],
       directives: [],
 
