@@ -6,7 +6,7 @@
         <div class="col-12 col-md-9">
           <q-card>
             <q-card-section>
-              <q-markdown :src="markdown.body"/>
+              <q-markdown :src="markdown.body" no-line-numbers />
             </q-card-section>
           </q-card>
         </div>

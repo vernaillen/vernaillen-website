@@ -57,6 +57,7 @@ import Logo from '../components/Logo'
 import PageNav from '../components/PageNav'
 import ToolbarActions from '../components/ToolbarActions'
 import MyFooter from '../components/Footer'
+import hljs from 'highlight.js'
 
 export default {
   name: 'MyLayout',
@@ -83,6 +84,11 @@ export default {
   updated () {
     this.$nextTick(function () {
       this.pageHeight = this.$refs.pageWrapper.clientHeight
+    })
+  },
+  mounted () {
+    document.querySelectorAll('pre code').forEach((block) => {
+      hljs.highlightBlock(block)
     })
   }
 }
