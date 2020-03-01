@@ -58,6 +58,7 @@ import { markdownFiles } from '../load-markdown-files'
 import notFound from '../markdown/notFound.md'
 import PageHeader from '../components/PageHeader'
 import BlogPostTags from '../components/BlogPostTags'
+import hljs from 'highlight.js'
 
 export default {
   name: 'MarkdownPage',
@@ -123,6 +124,11 @@ export default {
       }
       return url + this.pathMatch + '.md'
     }
+  },
+  mounted () {
+    document.querySelectorAll('pre code').forEach((block) => {
+      hljs.highlightBlock(block)
+    })
   }
 }
 </script>
