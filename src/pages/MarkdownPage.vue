@@ -11,7 +11,7 @@
           </q-card>
         </div>
         <div class="col-12 col-md-3">
-          <q-card>
+          <q-card class="sticky-sidebar">
             <q-card-section class="post-meta-section">
               <div class="row">
                 <div class="col-6 col-md-12 post-meta-1">
@@ -59,6 +59,7 @@ import notFound from '../markdown/notFound.md'
 import PageHeader from '../components/PageHeader'
 import BlogPostTags from '../components/BlogPostTags'
 import hljs from 'highlight.js'
+import Stickyfill from 'stickyfilljs'
 
 export default {
   name: 'MarkdownPage',
@@ -129,6 +130,9 @@ export default {
     document.querySelectorAll('pre code').forEach((block) => {
       hljs.highlightBlock(block)
     })
+    document.querySelectorAll('.sticky-sidebar').forEach((sidebar) => {
+      Stickyfill.add(sidebar)
+    })
   }
 }
 </script>
@@ -157,4 +161,14 @@ export default {
             .post-meta
               display: block
               padding-bottom: 5px
+
+  .sticky-sidebar
+    position: -webkit-sticky
+    position: sticky
+    top: 100px
+
+  .sticky-sidebar:before,
+  .sticky-sidebar:after
+    content: ''
+    display: table
 </style>
