@@ -5,7 +5,7 @@ date: 03/01/2020
 tag:
 - liferay
 - kubernetes
-- digitaocean
+- digitalocean
 author: Wouter
 location: Zottegem
 ---
