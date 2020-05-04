@@ -12,17 +12,16 @@
         </div>
         <div class="col-12 col-md-3">
           <q-card class="sticky-sidebar">
-            <q-card-section class="post-meta-section">
-              <div class="row">
-                <div class="col-6 col-md-12 post-meta-1">
-                  <span class="post-meta"><q-icon name="far fa-user"/> {{markdown.attributes.author}}</span>
-                  <span class="post-meta"><q-icon name="far fa-calendar"/> {{markdown.displayDate}}</span>
-                  <span class="post-meta"><q-icon name="fas fa-map-marker-alt"/> {{markdown.attributes.location}}</span>
-                </div>
-                <div class="col-6 col-md-12 post-meta-2">
-                  <blog-post-tags :tags="markdown.attributes.tag"/>
-                </div>
-              </div>
+            <q-card-section class="post-date">
+              <q-icon name="far fa-clock"/> {{markdown.displayDate}}
+            </q-card-section>
+            <q-card-section class="post-description">
+              {{markdown.attributes.desc}}
+            </q-card-section>
+            <q-card-section>
+              <blog-post-tags :tags="markdown.attributes.tag"/>
+            </q-card-section>
+            <q-card-section class="post-navigation">
               <div class="row blog-nav-buttons">
                 <q-btn :to="prev"
                        :disable="prev === ''"
@@ -139,7 +138,10 @@ export default {
 
 <style lang="sass">
   .markdown-page
-    .post-meta-section
+    .post-date
+      font-size: 90%
+      color: $primary
+    .post-navigation
       position: relative
       .q-btn
         position: absolute

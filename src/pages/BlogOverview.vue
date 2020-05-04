@@ -14,33 +14,25 @@
             <q-card-section class="card-title">
               <h6>{{post.attributes.title}}</h6>
             </q-card-section>
+            <q-card-section class="post-date">
+              <q-icon name="far fa-clock"/> {{post.displayDate}}
+            </q-card-section>
             <q-card-section>
               {{post.attributes.desc}}
             </q-card-section>
             <q-card-section class="post-meta-section">
-              <div class="row">
-                <div class="col-12 col-sm-8">
-                  <div class="post-meta-1">
-                    <span class="post-meta"><q-icon name="far fa-user"/> {{post.attributes.author}}</span>
-                    <span class="post-meta"><q-icon name="far fa-calendar"/> {{post.displayDate}}</span>
-                    <span class="post-meta"><q-icon name="fas fa-map-marker-alt"/> {{post.attributes.location}}</span>
-                  </div>
-                  <div class="post-meta-2">
-                    <blog-post-tags :tags="post.attributes.tag"/>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-4">
-                  <br/><br/>
-                  <q-btn
-                    clickable
-                    class="read-more"
-                    color="secondary"
-                    :to="'/blog/' + post.slug"
-                    :area-label="'Go to blog post ' + post.attributes.title"
-                  >
-                    Read more
-                  </q-btn>
-                </div>
+              <blog-post-tags :tags="post.attributes.tag"/>
+              <div class="col-12 col-sm-4">
+                <br/><br/>
+                <q-btn
+                  clickable
+                  class="read-more"
+                  color="secondary"
+                  :to="'/blog/' + post.slug"
+                  :area-label="'Go to blog post ' + post.attributes.title"
+                >
+                  Read more
+                </q-btn>
               </div>
             </q-card-section>
           </q-card>
@@ -92,3 +84,10 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+  .post-date
+    font-size: 80%
+    margin-right: 12px
+    color: $primary
+</style>
