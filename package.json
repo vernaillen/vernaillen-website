@@ -23,29 +23,29 @@
     "concurrently:dev:jest": "concurrently \"quasar dev\" \"jest --watch\""
   },
   "dependencies": {
-    "@quasar/extras": "^1.7.0",
-    "highlight.js": "^10.0.2",
-    "quasar": "^1.10.4",
+    "@quasar/extras": "^1.8.2",
+    "highlight.js": "^10.0.3",
+    "quasar": "^1.12.3",
     "stickyfilljs": "^2.1.0",
-    "vue-i18n": "^8.17.4",
-    "vuex": "^3.3.0"
+    "vue-i18n": "^8.18.1",
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
-    "@quasar/app": "^1.8.4",
-    "@quasar/quasar-app-extension-qmarkdown": "^1.0.24",
+    "@quasar/app": "^1.9.6",
+    "@quasar/quasar-app-extension-qmarkdown": "^1.0.28",
     "@quasar/quasar-app-extension-testing": "^1.0.0",
-    "@quasar/quasar-app-extension-testing-unit-jest": "^1.0.0",
+    "@quasar/quasar-app-extension-testing-unit-jest": "^1.0.1",
     "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.2.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.2.2",
-    "front-matter": "^3.1.0",
-    "moment": "^2.25.1"
+    "front-matter": "^4.0.2",
+    "moment": "^2.26.0"
   },
   "engines": {
     "node": ">= 10.18.1",
