@@ -1,7 +1,7 @@
 defaults: &defaults
   docker:
     - image: circleci/node:14
-  working_directory: ~/tmp/vernaillen-website
+  working_directory: /tmp/workspace
 
 version: 2.1
 jobs:
@@ -9,24 +9,33 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - attach_workspace:
+          at: /tmp/workspace
       - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run: yarn install
       - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run: yarn build
       - sonarcloud/scan
+      - persist_to_workspace:
+          root: .
+          paths: .
   test:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run: yarn test:unit
       - run: sudo yarn global add codecov
       - run: codecov
   deploy:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run: sudo yarn global add now
       - run: now deploy -t ${NOW_TOKEN} --prod --local-config .now/production.json --confirm ./dist/pwa
 
