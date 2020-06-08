@@ -11,16 +11,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/tmp/vernaillen-website
-      - restore_cache:
-          keys:
-            - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
-            - npm-cache-{{ .Branch }}
-            - npm-cache-
       - run: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn build
       - sonarcloud/scan
       - persist_to_workspace:
