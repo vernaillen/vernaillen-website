@@ -12,7 +12,7 @@
         <div class="col-12 col-sm-6" v-for="(post, index) in blogPosts" :key="index">
           <q-card>
             <q-card-section class="card-title">
-              <h6>{{post.attributes.title}}</h6>
+              <h6><router-link :to="'/blog/' + post.slug">{{post.attributes.title}}</router-link></h6>
             </q-card-section>
             <q-card-section class="post-date">
               <q-icon name="far fa-clock"/> {{post.displayDate}}
