@@ -1,35 +1,29 @@
 defaults: &defaults
   docker:
-    - image: circleci/node:12-browsers-legacy
+    - image: circleci/node:14
   working_directory: ~/tmp/vernaillen-website
 
 version: 2.1
 jobs:
   build:
-    <<: *defaults
     steps:
       - checkout
-      - attach_workspace:
-          at: ~/tmp/vernaillen-website
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run: yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
       - run: yarn build
       - sonarcloud/scan
-      - persist_to_workspace:
-          root: .
-          paths: .
   test:
-    <<: *defaults
     steps:
-      - attach_workspace:
-          at: ~/tmp/vernaillen-website
       - run: yarn test:unit
       - run: sudo yarn global add codecov
       - run: codecov
   deploy:
-    <<: *defaults
     steps:
-      - attach_workspace:
-          at: ~/tmp/vernaillen-website
       - run: sudo yarn global add now
       - run: now deploy -t ${NOW_TOKEN} --prod --local-config .now/production.json --confirm ./dist/pwa
 
