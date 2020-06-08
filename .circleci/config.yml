@@ -18,7 +18,7 @@ jobs:
           paths:
             - node_modules
           key: dependency-cache-{{ checksum "yarn.lock" }}
-      - run: yarn build
+      - run: yarn build-pwa
       - sonarcloud/scan
       - persist_to_workspace:
           root: .

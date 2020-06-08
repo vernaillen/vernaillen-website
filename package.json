@@ -10,6 +10,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "build": "quasar build -m ssr ",
+    "build-pwa": "quasar build -m pwa ",
     "docker-build": "docker build . -t vernaillen/vernaillen-website:0.0.3",
     "docker-start": "docker run --name vernaillen-website -d -p 3000:3000 vernaillen/vernaillen-website:0.0.3",
     "docker-push": "docker push vernaillen/vernaillen-website:0.0.3",
