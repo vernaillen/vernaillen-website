@@ -97,14 +97,14 @@ export default {
         bgAlpha: 0,
         showBgColor: false,
         overlay: true,
-        reflexRatio: 0.5,
+        reflexRatio: 0.4,
         reflexAlpha: 0.3,
         showLeds: true,
         showPeaks: false,
         showScale: false,
         gradient: 'rainbow',
-        mode: 3,
-        height: 200
+        mode: 6,
+        height: 250
       },
       audioPlayer: undefined,
       soundCloudData: undefined,
