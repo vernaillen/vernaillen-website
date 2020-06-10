@@ -8,7 +8,7 @@
         </q-card-section>
         <q-card-section v-if="soundCloudData">
           <div class="row" v-if="soundCloudData.title">
-            <div class="col-2">
+            <div class="col-md-2 col-3">
               Song
             </div>
             <div class="col">
@@ -16,7 +16,7 @@
             </div>
           </div>
           <div class="row" v-if="soundCloudData.user">
-            <div class="col-2">
+            <div class="col-md-2 col-3">
               Profile
             </div>
             <div class="col">
@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="row" v-if="soundCloudData.description">
-            <div class="col-2">
+            <div class="col-md-2 col-3">
               Description
             </div>
             <div class="col">
@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="row" v-if="soundCloudData.artwork_url">
-            <div class="col-2">
+            <div class="col-md-2 col-3">
               Artwork
             </div>
             <div class="col">
