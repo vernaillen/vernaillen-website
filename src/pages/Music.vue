@@ -44,6 +44,9 @@
           <q-btn clickable @click="click" :disabled="loading">
             <q-icon v-if="buttonIcon" :name="buttonIcon" style="font-size: 1.3em;" /> {{buttonText}}
           </q-btn>
+          <!--q-btn clickable @click="pause" :disabled="loading">
+            <q-icon name="fa fa-pause" style="font-size: 1.3em;" />
+          </q-btn-->
           <q-knob
             v-model="volume"
             :min="minVolume"
@@ -59,8 +62,15 @@
             <q-icon name="volume_up" class="q-mr-xs" />
           </q-knob>
           <p v-if="loadingError">
-            {{loadingError}}
+            {{loadingError}}<br/>
           </p>
+          <div id="time">
+            {{('0' + hours).slice(-2)}}:{{('0' + minutes).slice(-2)}}:{{('0' + seconds).slice(-2)}}
+          </div>
+          <div id="waveformProgress">
+            <q-linear-progress :value="percentage" color="#1bbc9b" class="q-mt-sm" />
+            <div class="waveformImg" :style="waveformBg"></div>
+          </div>
         </q-card-section>
         <q-card-section v-else>
           loading song from SoundCloud...
@@ -114,10 +124,13 @@ export default {
       clientId: '1745017edcfeb72a175c95614a1cc212',
       loading: true,
       loadingError: '',
-      volume: -15,
+      volume: -12,
       minVolume: -20,
       maxVolume: 0,
-      analyzer: undefined
+      analyzer: undefined,
+      oEmbed: undefined,
+      duration: 0,
+      pausedAt: 0
     }
   },
   computed: {
@@ -128,10 +141,29 @@ export default {
         }
       }
       return { title: '404', body: notFound, isBlogPost: false }
+    },
+    totalSeconds () {
+      return Tone.Transport.seconds
+    },
+    hours () {
+      return Math.floor(this.totalSeconds / 3600)
+    },
+    minutes () {
+      return Math.floor(this.totalSeconds / 60)
+    },
+    seconds () {
+      return Math.ceil(this.totalSeconds % 60)
+    },
+    percentage () {
+      return (this.totalSeconds / this.duration) * 1000
+    },
+    waveformBg () {
+      return 'background-image: url(' + this.soundCloudData.waveform_url + ')'
     }
   },
   created () {
     this.loadUrl()
+    this.loadUser()
   },
   methods: {
     connectAnalyzer (audioMotion) {
@@ -149,14 +181,30 @@ export default {
     start () {
       this.buttonText = ''
       this.buttonIcon = 'fa fa-stop'
-      this.audioPlayer.start()
+      Tone.Transport.seconds = 0
+      Tone.Transport.start()
+      this.audioPlayer.start(0)
     },
     stop () {
+      Tone.Transport.stop()
       if (this.audioPlayer) {
         this.audioPlayer.stop()
       }
       this.buttonText = ''
       this.buttonIcon = 'fa fa-play'
+    },
+    pause () {
+      if (this.audioPlayer.state === 'started') {
+        console.log('was playing')
+        this.pausedAt = Tone.Transport.seconds
+        Tone.Transport.pause()
+        this.audioPlayer.stop()
+      } else {
+        console.log('was paused')
+        Tone.Transport.seconds = this.pausedAt
+        Tone.Transport.start()
+        this.audioPlayer.start(new Date(), this.pausedAt)
+      }
     },
     loadUrl () {
       this.stop()
@@ -174,15 +222,28 @@ export default {
     },
     loadPlayer (data) {
       this.soundCloudData = data
+      this.duration = data.duration
       this.audioPlayer = new Tone.Player(data.stream_url + '?client_id=' + this.clientId, this.loaded)
       this.audioPlayer.volume.value = this.volume
       this.audioPlayer.fan(this.analyzer)
       this.audioPlayer.toMaster()
     },
+    loadUser () {
+      axios
+        .get('https://soundcloud.com/oembed?url=' + this.trackUrl)
+        .then(result => { this.loadOEmbedHtml(result.data) })
+        .catch(error => {
+          this.loadingError = error
+          console.log(error)
+        })
+    },
     loaded () {
       this.loading = false
       this.buttonText = ''
       this.buttonIcon = 'fa fa-play'
+    },
+    loadOEmbedHtml (data) {
+      this.oEmbed = data.html
     },
     userUrl (id) {
       return 'https://soundcloud.com/' + id
@@ -197,7 +258,23 @@ export default {
 </script>
 
 <style scoped>
- .volume-button {
-   color: #1bbc9b
- }
+  .volume-button {
+    color: #1bbc9b
+  }
+  #waveformProgress {
+    position: relative;
+  }
+  #waveformProgress .waveformImg {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  }
+  #waveformProgress .q-linear-progress {
+    font-size: 70px;
+    background: #2e3d50;
+  }
 </style>

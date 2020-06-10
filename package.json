@@ -16,7 +16,7 @@
     "docker-push": "docker push vernaillen/vernaillen-website:0.0.3",
     "k8s-apply": "kubectl apply -f k8s.yaml ",
     "deploy": "yarn docker-build && yarn docker-push && yarn k8s-apply",
-    "dev": "quasar dev -m pwa",
+    "serve": "quasar dev -m pwa",
     "test:unit": "jest --updateSnapshot",
     "test:unit:watch": "jest --watch",
     "test:unit:watchAll": "jest --watchAll",
