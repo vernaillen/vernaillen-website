@@ -11,6 +11,7 @@ const routes = [
       { path: '/blog/*', component: () => import('pages/MarkdownPage.vue'), props: true },
       { path: '/page/*', component: () => import('pages/MarkdownPage.vue'), props: true },
       { path: '/contact', component: () => import('pages/Contact.vue') },
+      { path: '/music', component: () => import('pages/Music.vue') },
       { path: '', redirect: '/home' }
     ]
   }

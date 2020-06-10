@@ -5,6 +5,7 @@
       <page-nav-item title="Career" url="/career"/>
       <page-nav-item title="Skills" url="/page/skills"/>
       <page-nav-item title="Blog" url="/blog"/>
+      <page-nav-item title="Music" url="/music"/>
       <page-nav-item title="About" url="/page/about"/>
       <page-nav-item title="Contact" url="/contact"/>
     </q-list>

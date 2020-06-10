@@ -9,7 +9,8 @@ module.exports = function (ctx) {
     boot: [
       'i18n',
       'addressbar-color',
-      'highlight-js'
+      'highlight-js',
+      'vue-audiomotion-analyzer'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -64,7 +65,8 @@ module.exports = function (ctx) {
         'QBreadcrumbsEl',
         'QSpace',
         'QLinearProgress',
-        'QScrollObserver'
+        'QScrollObserver',
+        'QKnob'
       ],
       directives: [],
 
