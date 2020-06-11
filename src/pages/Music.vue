@@ -6,80 +6,47 @@
         <q-card-section>
           <q-markdown :src="markdown.body"/>
         </q-card-section>
-        <q-card-section v-if="soundCloudData">
-          <div class="row" v-if="soundCloudData.title">
-            <div class="col-md-2 col-3">
-              Song
-            </div>
-            <div class="col">
-              <a :href="soundCloudData.permalink_url" target="_blank">{{soundCloudData.title}}</a>
-            </div>
-          </div>
-          <div class="row" v-if="soundCloudData.user">
-            <div class="col-md-2 col-3">
-              Profile
-            </div>
-            <div class="col">
-              <a :href="userUrl(soundCloudData.user.permalink)" target="_blank">{{soundCloudData.user.username}}</a>
-            </div>
-          </div>
-          <div class="row" v-if="soundCloudData.description">
-            <div class="col-md-2 col-3">
-              Description
-            </div>
-            <div class="col">
-              <span v-if="soundCloudData.description">{{soundCloudData.description}}</span>
-            </div>
-          </div>
-          <div class="row" v-if="soundCloudData.artwork_url">
-            <div class="col-md-2 col-3">
-              Artwork
-            </div>
-            <div class="col">
-              <a :href="soundCloudData.permalink_url" target="_blank">
-                <img :src="soundCloudData.artwork_url"/>
-              </a>
-            </div>
-          </div>
-          <q-btn clickable @click="click" :disabled="loading">
-            <q-icon v-if="buttonIcon" :name="buttonIcon" style="font-size: 1.3em;" /> {{buttonText}}
-          </q-btn>
-          <!--q-btn clickable @click="pause" :disabled="loading">
-            <q-icon name="fa fa-pause" style="font-size: 1.3em;" />
-          </q-btn-->
-          <q-knob
-            v-model="volume"
-            :min="minVolume"
-            :max="maxVolume"
-            show-value
-            font-size="16px"
-            class="volume-button q-ma-md"
-            size="40px"
-            :thickness="0.26"
-            color="#1bbc9b"
-            track-color="grey-3"
-          >
-            <q-icon name="volume_up" class="q-mr-xs" />
-          </q-knob>
-          <p v-if="loadingError">
-            {{loadingError}}<br/>
-          </p>
-          <div id="time">
-            {{('0' + hours).slice(-2)}}:{{('0' + minutes).slice(-2)}}:{{('0' + seconds).slice(-2)}}
-          </div>
-          <div id="waveformProgress">
-            <q-linear-progress :value="percentage" color="#1bbc9b" class="q-mt-sm" />
-            <div class="waveformImg" :style="waveformBg"></div>
-          </div>
-        </q-card-section>
-        <q-card-section v-else>
-          loading song from SoundCloud...
-        </q-card-section>
-        <q-card-section>
-          <audioMotionAnalyzer :options="analyzerOptions" @audioMotion="connectAnalyzer"/>
-        </q-card-section>
       </q-card>
-      <br/><br/><br/><br/>
+      <q-card-section>
+        <audioMotionAnalyzer :options="analyzerOptions" @audioMotion="connectAnalyzer"/>
+      </q-card-section>
+      <q-card-section>
+        <q-btn clickable @click="clickBack" :disabled="backDisabled">
+          <q-icon v-if="backButtonIcon" :name="backButtonIcon" style="font-size: 1.3em;" />
+        </q-btn>
+        <q-btn clickable @click="click" :disabled="loading">
+          <q-icon v-if="playButtonIcon" :name="playButtonIcon" style="font-size: 1.3em;" />
+        </q-btn>
+        <q-knob
+          v-model="volume"
+          :min="minVolume"
+          :max="maxVolume"
+          show-value
+          font-size="16px"
+          class="volume-button q-ma-md"
+          size="40px"
+          :thickness="0.26"
+          color="#1bbc9b"
+          track-color="grey-3"
+        >
+          <q-icon name="volume_up" class="q-mr-xs" />
+        </q-knob><span v-if="loading">Loading audio buffer...</span>
+        <!--div id="time">
+          {{time}}
+        </div-->
+        <div id="waveformProgress">
+          <q-linear-progress :value="percentage" color="#1bbc9b" class="q-mt-sm" />
+          <div class="waveformImg" :style="waveformBg"></div>
+        </div>
+      </q-card-section>
+      <div v-for="(track, index) in tracks" :key="index">
+        <soundCloudTrack
+          :track="track"
+          :audio-context="analyzerOptions.audioCtx"
+          :analyzer="analyzer"
+          @loadTrack="loadTrack"/>
+      </div>
+      <br/><br/>
     </div>
   </q-page>
 </template>
@@ -88,6 +55,7 @@
 import { markdownFiles } from '../load-markdown-files'
 import notFound from '../markdown/notFound.md'
 import PageHeader from '../components/PageHeader'
+import SoundCloudTrack from '../components/SoundCloudTrack'
 import * as Tone from 'tone'
 import axios from 'axios'
 
@@ -97,7 +65,8 @@ Tone.setContext(audioContext)
 export default {
   name: 'Music',
   components: {
-    PageHeader
+    PageHeader,
+    SoundCloudTrack
   },
   data () {
     return {
@@ -107,30 +76,28 @@ export default {
         bgAlpha: 0,
         showBgColor: false,
         overlay: true,
-        reflexRatio: 0.4,
+        reflexRatio: 0.3,
         reflexAlpha: 0.3,
         showLeds: true,
         showPeaks: false,
         showScale: false,
         gradient: 'rainbow',
         mode: 6,
-        height: 250
+        height: 150
       },
+      analyzer: undefined,
       audioPlayer: undefined,
-      soundCloudData: undefined,
-      buttonText: '',
-      buttonIcon: '',
-      trackUrl: 'https://soundcloud.com/woutervernaillen/deep-organ-house-sounddesign-test',
+      tracks: undefined,
+      soundCloudUserId: 45616,
       clientId: '1745017edcfeb72a175c95614a1cc212',
-      loading: true,
-      loadingError: '',
       volume: -12,
       minVolume: -20,
       maxVolume: 0,
-      analyzer: undefined,
-      oEmbed: undefined,
       duration: 0,
-      pausedAt: 0
+      backButtonIcon: 'fa fa-step-backward',
+      state: 'stopped',
+      loading: true,
+      loadedTrack: undefined
     }
   },
   computed: {
@@ -142,112 +109,127 @@ export default {
       }
       return { title: '404', body: notFound, isBlogPost: false }
     },
-    totalSeconds () {
-      return Tone.Transport.seconds
+    waveformBg () {
+      if (this.loadedTrack) {
+        return 'background-image: url(' + this.loadedTrack.waveform_url + ')'
+      } else {
+        return ''
+      }
     },
-    hours () {
-      return Math.floor(this.totalSeconds / 3600)
+    playButtonIcon () {
+      if (this.state === 'started') {
+        return 'fa fa-pause'
+      } else {
+        return 'fa fa-play'
+      }
     },
-    minutes () {
-      return Math.floor(this.totalSeconds / 60)
-    },
-    seconds () {
-      return Math.ceil(this.totalSeconds % 60)
+    backDisabled () {
+      return this.loading || this.state === 'stopped'
     },
     percentage () {
-      return (this.totalSeconds / this.duration) * 1000
-    },
-    waveformBg () {
-      return 'background-image: url(' + this.soundCloudData.waveform_url + ')'
+      return this.calculatePercentage()
     }
+    /* time () {
+      return ('0' + this.calculateHours()).slice(-2) + ':' + ('0' + this.calculateMinutes()).slice(-2) + ':' + ('0' + this.calculateSeconds()).slice(-2)
+    } */
   },
   created () {
-    this.loadUrl()
-    this.loadUser()
+    this.getTracks()
   },
   methods: {
     connectAnalyzer (audioMotion) {
       this.analyzer = audioMotion.getAnalyzer()
     },
-    click () {
-      if (this.audioPlayer != null && this.audioPlayer.state === 'started') {
-        this.stop()
-      } else {
-        this.buttonText = ''
-        this.buttonIcon = 'fa fa-stop'
-        this.start()
-      }
-    },
-    start () {
-      this.buttonText = ''
-      this.buttonIcon = 'fa fa-stop'
-      Tone.Transport.seconds = 0
-      Tone.Transport.start()
-      this.audioPlayer.start(0)
-    },
-    stop () {
-      Tone.Transport.stop()
-      if (this.audioPlayer) {
-        this.audioPlayer.stop()
-      }
-      this.buttonText = ''
-      this.buttonIcon = 'fa fa-play'
-    },
-    pause () {
-      if (this.audioPlayer.state === 'started') {
-        console.log('was playing')
-        this.pausedAt = Tone.Transport.seconds
-        Tone.Transport.pause()
-        this.audioPlayer.stop()
-      } else {
-        console.log('was paused')
-        Tone.Transport.seconds = this.pausedAt
-        Tone.Transport.start()
-        this.audioPlayer.start(new Date(), this.pausedAt)
-      }
-    },
-    loadUrl () {
-      this.stop()
-      this.soundCloudData = null
-      this.loading = true
-      this.buttonText = 'Loading Audio Buffer...'
-      this.buttonIcon = ''
+    getTracks () {
       axios
-        .get('https://api.soundcloud.com/resolve.json?url=' + this.trackUrl + '&client_id=' + this.clientId)
-        .then(result => { this.loadPlayer(result.data) })
+        .get('https://api.soundcloud.com/users/' + this.soundCloudUserId + '/tracks?client_id=' + this.clientId)
+        .then(result => { this.loadTracks(result.data) })
         .catch(error => {
           this.loadingError = error
           console.log(error)
         })
     },
-    loadPlayer (data) {
-      this.soundCloudData = data
-      this.duration = data.duration
-      this.audioPlayer = new Tone.Player(data.stream_url + '?client_id=' + this.clientId, this.loaded)
+    loadTracks (data) {
+      this.tracks = data
+      if (data.length > 0) {
+        // load the most recent track
+        this.loadTrack(data[0])
+      }
+    },
+    clickBack () {
+      this.audioPlayer.unsync().stop()
+      Tone.Transport.stop()
+      this.updateState()
+    },
+    click () {
+      if (this.state === 'started') {
+        Tone.Transport.pause()
+      } else {
+        if (this.percentage > 1) {
+          this.audioPlayer.unsync()
+          Tone.Transport.stop()
+        }
+        if (this.state !== 'paused') {
+          this.audioPlayer.sync().start()
+        }
+        Tone.Transport.start()
+      }
+      this.updateState()
+    },
+    updateState () {
+      this.state = Tone.Transport.state
+    },
+    loadTrack (track) {
+      this.loading = true
+      this.loadedTrack = track
+      if (this.audioPlayer) {
+        this.audioPlayer.unsync().stop()
+      }
+      Tone.Transport.stop()
+      this.audioPlayer = new Tone.Player(this.loadedTrack.stream_url + '?client_id=' + this.clientId, this.loaded)
       this.audioPlayer.volume.value = this.volume
       this.audioPlayer.fan(this.analyzer)
       this.audioPlayer.toMaster()
-    },
-    loadUser () {
-      axios
-        .get('https://soundcloud.com/oembed?url=' + this.trackUrl)
-        .then(result => { this.loadOEmbedHtml(result.data) })
-        .catch(error => {
-          this.loadingError = error
-          console.log(error)
-        })
+      this.updateState()
     },
     loaded () {
       this.loading = false
-      this.buttonText = ''
-      this.buttonIcon = 'fa fa-play'
     },
-    loadOEmbedHtml (data) {
-      this.oEmbed = data.html
-    },
-    userUrl (id) {
-      return 'https://soundcloud.com/' + id
+    calculatePercentage () {
+      if (this.loadedTrack) {
+        const perc = (Tone.Transport.seconds / this.loadedTrack.duration) * 1000
+        if (perc > 1) {
+          Tone.Transport.pause()
+        }
+        return perc
+      } else {
+        return 0
+      }
     }
+    /* calculateHours () {
+      if (this.loadedTrack) {
+        const secs = Tone.Transport.seconds
+        return Math.floor(secs / 3600)
+      } else {
+        return 0
+      }
+    },
+    calculateMinutes () {
+      if (this.loadedTrack) {
+        const secs = Tone.Transport.seconds
+        return Math.floor(secs / 60)
+      } else {
+        return 0
+      }
+    },
+    calculateSeconds () {
+      if (this.loadedTrack) {
+        const secs = Tone.Transport.seconds
+        return Math.floor(secs % 60)
+      } else {
+        return 0
+      }
+    } */
   },
   watch: {
     volume: function (value) {
