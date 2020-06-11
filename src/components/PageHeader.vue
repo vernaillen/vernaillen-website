@@ -1,7 +1,7 @@
 <template>
   <div class="pageheader">
+    <audioMotionAnalyzer v-if="analyzerOptions" :options="analyzerOptions" @audioMotion="connectAnalyzer"/>
     <div class="page-container q-px-md">
-
       <div class="row full-width">
         <div class="col-12 text-center">
           <h4>{{title}}</h4>
@@ -34,7 +34,10 @@ export default {
   props: {
     title: String,
     currentPageName: String,
-    isBlogPost: Boolean
+    isBlogPost: Boolean,
+    analyzerOptions: {
+      required: false
+    }
   },
   computed: {
     pageName () {
@@ -47,6 +50,11 @@ export default {
     isTagPage () {
       return this.currentPageName.startsWith('tag:')
     }
+  },
+  methods: {
+    connectAnalyzer (analyser) {
+      this.$emit('connectAnalyzer', analyser)
+    }
   }
 }
 </script>
@@ -58,6 +66,12 @@ export default {
   margin-bottom: 24px
   border-bottom: 1px solid #e1e4e8
   background-color: #f5f5f5
+  height: 140px
+
+  #audioMotionAnalyzer
+    position: absolute
+    width: 95%
+    overflow: hidden
 
   h4
     font-weight: 900

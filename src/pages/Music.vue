@@ -1,15 +1,17 @@
 <template>
   <q-page>
-    <page-header :title="markdown.attributes.title" currentUrl="/#/music" :currentPageName="markdown.attributes.pageName" />
+    <page-header
+      :title="markdown.attributes.title"
+      currentUrl="/#/music"
+      :currentPageName="markdown.attributes.pageName"
+      :analyzerOptions="analyzerOptions"
+      @connectAnalyzer="connectAnalyzer"/>
     <div class="page-container q-px-md">
       <q-card>
         <q-card-section>
           <q-markdown :src="markdown.body"/>
         </q-card-section>
       </q-card>
-      <q-card-section>
-        <audioMotionAnalyzer :options="analyzerOptions" @audioMotion="connectAnalyzer"/>
-      </q-card-section>
       <q-card-section>
         <q-btn clickable @click="clickBack" :disabled="backDisabled">
           <q-icon v-if="backButtonIcon" :name="backButtonIcon" style="font-size: 1.3em;" />
@@ -30,7 +32,7 @@
           track-color="grey-3"
         >
           <q-icon name="volume_up" class="q-mr-xs" />
-        </q-knob><span v-if="loading">Loading audio buffer...</span>
+        </q-knob><span v-if="loading">Buffering audio...</span>
         <!--div id="time">
           {{time}}
         </div-->
@@ -76,14 +78,12 @@ export default {
         bgAlpha: 0,
         showBgColor: false,
         overlay: true,
-        reflexRatio: 0.3,
-        reflexAlpha: 0.3,
         showLeds: true,
         showPeaks: false,
         showScale: false,
         gradient: 'rainbow',
         mode: 6,
-        height: 150
+        height: 115
       },
       analyzer: undefined,
       audioPlayer: undefined,
