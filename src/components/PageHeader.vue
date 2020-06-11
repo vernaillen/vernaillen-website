@@ -1,5 +1,5 @@
 <template>
-  <div class="pageheader">
+  <div :class="pageHeaderClass">
     <audioMotionAnalyzer v-if="analyzerOptions" :options="analyzerOptions" @audioMotion="connectAnalyzer"/>
     <div class="page-container q-px-md">
       <div class="row full-width">
@@ -37,6 +37,10 @@ export default {
     isBlogPost: Boolean,
     analyzerOptions: {
       required: false
+    },
+    sticky: {
+      boolean: false,
+      required: false
     }
   },
   computed: {
@@ -49,6 +53,10 @@ export default {
     },
     isTagPage () {
       return this.currentPageName.startsWith('tag:')
+    },
+    pageHeaderClass () {
+      if (this.sticky) return 'pageHeader sticky'
+      return 'pageHeader'
     }
   },
   methods: {
@@ -59,38 +67,44 @@ export default {
 }
 </script>
 
-<style lang="sass">
-.pageheader
-  position: relative
-  padding: 24px 10px
-  margin-bottom: 24px
-  border-bottom: 1px solid #e1e4e8
-  background-color: #f5f5f5
-  height: 140px
+<style lang="sass" scoped>
+  .pageHeader
+    position: relative
+    padding: 15px
+    margin-bottom: 24px
+    border-bottom: 1px solid #e1e4e8
+    background-color: #f5f5f5
+    height: 120px
 
-  #audioMotionAnalyzer
-    position: absolute
-    width: 95%
-    overflow: hidden
+    #audioMotionAnalyzer
+      position: absolute
+      width: 95%
+      overflow: hidden
 
-  h4
-    font-weight: 900
-    margin: 0
+    h4
+      font-weight: 900
+      margin: 0
 
-  .breadcrumbs
-    font-size: 16px
-    color: #959da5
-    margin-top: 6px
-    margin-bottom: 12px
-    .repo-icon
-      fill: currentColor
-      margin-bottom: -3px
-      margin-right: 10px
-    a
-      text-decoration: none
+    .breadcrumbs
+      font-size: 14px
       color: #959da5
-    a:hover
-      text-decoration: underline
-    .path-divider
-      padding: 3px
+      margin-top: 6px
+      margin-bottom: 12px
+      .repo-icon
+        fill: currentColor
+        margin-bottom: -3px
+        margin-right: 10px
+      a
+        text-decoration: none
+        color: #959da5
+      a:hover
+        text-decoration: underline
+      .path-divider
+        padding: 3px
+
+  .pageHeader.sticky
+    position: fixed
+    z-index: 1000
+    width: 100%
+    top: 61px
 </style>

@@ -1,12 +1,14 @@
 <template>
   <q-page>
     <page-header
+      elevated
       :title="markdown.attributes.title"
       currentUrl="/#/music"
       :currentPageName="markdown.attributes.pageName"
       :analyzerOptions="analyzerOptions"
-      @connectAnalyzer="connectAnalyzer"/>
-    <div class="page-container q-px-md">
+      @connectAnalyzer="connectAnalyzer"
+      sticky=true />
+    <div id="musicPageContent" class="page-container q-px-md">
       <q-card>
         <q-card-section>
           <q-markdown :src="markdown.body"/>
@@ -14,7 +16,7 @@
       </q-card>
       <q-card-section>
         <q-btn clickable @click="clickBack" :disabled="backDisabled">
-          <q-icon v-if="backButtonIcon" :name="backButtonIcon" style="font-size: 1.3em;" />
+          <q-icon name="fa fa-step-backward" style="font-size: 1.3em;" />
         </q-btn>
         <q-btn clickable @click="click" :disabled="loading">
           <q-icon v-if="playButtonIcon" :name="playButtonIcon" style="font-size: 1.3em;" />
@@ -41,13 +43,14 @@
           <div class="waveformImg" :style="waveformBg"></div>
         </div>
       </q-card-section>
-      <div v-for="(track, index) in tracks" :key="index">
+      <div class="q-pa-md row items-start q-gutter-md">
         <soundCloudTrack
+          v-for="(track, index) in tracks" :key="index"
           :track="track"
           :audio-context="analyzerOptions.audioCtx"
           :analyzer="analyzer"
           @loadTrack="loadTrack"/>
-      </div>
+        </div>
       <br/><br/>
     </div>
   </q-page>
@@ -83,7 +86,7 @@ export default {
         showScale: false,
         gradient: 'rainbow',
         mode: 6,
-        height: 115
+        height: 105
       },
       analyzer: undefined,
       audioPlayer: undefined,
@@ -94,7 +97,6 @@ export default {
       minVolume: -20,
       maxVolume: 0,
       duration: 0,
-      backButtonIcon: 'fa fa-step-backward',
       state: 'stopped',
       loading: true,
       loadedTrack: undefined
@@ -239,24 +241,25 @@ export default {
 }
 </script>
 
-<style scoped>
-  .volume-button {
+<style lang="sass" scoped>
+  #musicPageContent
+    margin-top: 150px
+
+  .volume-button
     color: #1bbc9b
-  }
-  #waveformProgress {
-    position: relative;
-  }
-  #waveformProgress .waveformImg {
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100% 100%;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
-  }
-  #waveformProgress .q-linear-progress {
-    font-size: 70px;
-    background: #2e3d50;
-  }
+
+  #waveformProgress
+    position: relative
+    .waveformImg
+      background-repeat: no-repeat
+      background-position: center
+      background-size: 100% 100%
+      position: absolute
+      top: 0
+      height: 100%
+      width: 100%
+    .q-linear-progress
+      font-size: 40px
+      background: #2e3d50
+
 </style>

@@ -45,9 +45,9 @@
         </q-page-scroller>
       </q-page-container>
 
-      <my-footer>
+      <footer-player>
         <q-linear-progress :value="progress" />
-      </my-footer>
+      </footer-player>
     </div>
   </q-layout>
 </template>
@@ -56,7 +56,7 @@
 import Logo from '../components/Logo'
 import PageNav from '../components/PageNav'
 import ToolbarActions from '../components/ToolbarActions'
-import MyFooter from '../components/Footer'
+import FooterPlayer from '../components/FooterPlayer'
 
 export default {
   name: 'MyLayout',
@@ -64,7 +64,7 @@ export default {
     Logo,
     PageNav,
     ToolbarActions,
-    MyFooter
+    FooterPlayer
   },
   data () {
     return {

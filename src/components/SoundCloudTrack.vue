@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card class="my-card">
     <q-card-section>
       <div class="row" v-if="track.title">
         <div class="col-md-2 col-3">Track Title</div><div class="col"><a :href="track.permalink_url" target="_blank">{{track.title}}</a></div>
@@ -65,3 +65,9 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" scoped>
+  .my-card
+    width: 100%
+    max-width: 472px
+</style>
