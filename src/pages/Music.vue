@@ -5,8 +5,6 @@
       :title="markdown.attributes.title"
       currentUrl="/#/music"
       :currentPageName="markdown.attributes.pageName"
-      :analyzerOptions="analyzerOptions"
-      @connectAnalyzer="connectAnalyzer"
       sticky=true />
     <div id="musicPageContent" class="page-container q-px-md">
       <q-card>
@@ -15,12 +13,7 @@
         </q-card-section>
       </q-card>
       <q-card-section>
-        <q-btn clickable @click="clickBack" :disabled="backDisabled">
-          <q-icon name="fa fa-step-backward" style="font-size: 1.3em;" />
-        </q-btn>
-        <q-btn clickable @click="click" :disabled="loading">
-          <q-icon v-if="playButtonIcon" :name="playButtonIcon" style="font-size: 1.3em;" />
-        </q-btn>
+        <!--
         <q-knob
           v-model="volume"
           :min="minVolume"
@@ -35,22 +28,21 @@
         >
           <q-icon name="volume_up" class="q-mr-xs" />
         </q-knob><span v-if="loading">Buffering audio...</span>
+        -->
         <!--div id="time">
           {{time}}
         </div-->
+        <!--
         <div id="waveformProgress">
           <q-linear-progress :value="percentage" color="#1bbc9b" class="q-mt-sm" />
           <div class="waveformImg" :style="waveformBg"></div>
         </div>
+        -->
       </q-card-section>
-      <div class="q-pa-md row items-start q-gutter-md">
-        <soundCloudTrack
-          v-for="(track, index) in tracks" :key="index"
-          :track="track"
-          :audio-context="analyzerOptions.audioCtx"
-          :analyzer="analyzer"
-          @loadTrack="loadTrack"/>
-        </div>
+      <tonePlayerWave />
+      <tonePlayerSoundCloud class="q-pa-md row items-start q-gutter-md" :userId="soundCloudUserId"/>
+      <br/><br/>
+      <audioMotionAnalyzer :options="analyzerOptions" />
       <br/><br/>
     </div>
   </q-page>
@@ -60,36 +52,18 @@
 import { markdownFiles } from '../load-markdown-files'
 import notFound from '../markdown/notFound.md'
 import PageHeader from '../components/PageHeader'
-import SoundCloudTrack from '../components/SoundCloudTrack'
-import * as Tone from 'tone'
-import axios from 'axios'
-
-const audioContext = new AudioContext()
-Tone.setContext(audioContext)
 
 export default {
   name: 'Music',
   components: {
-    PageHeader,
-    SoundCloudTrack
+    PageHeader
   },
   data () {
     return {
       markdownFiles: markdownFiles,
       analyzerOptions: {
-        audioCtx: audioContext,
-        bgAlpha: 0,
-        showBgColor: false,
-        overlay: true,
-        showLeds: true,
-        showPeaks: false,
-        showScale: false,
-        gradient: 'rainbow',
-        mode: 6,
         height: 105
       },
-      analyzer: undefined,
-      audioPlayer: undefined,
       tracks: undefined,
       soundCloudUserId: 45616,
       clientId: '1745017edcfeb72a175c95614a1cc212',
@@ -117,7 +91,8 @@ export default {
       } else {
         return ''
       }
-    },
+    }
+    /*
     playButtonIcon () {
       if (this.state === 'started') {
         return 'fa fa-pause'
@@ -131,34 +106,13 @@ export default {
     percentage () {
       return this.calculatePercentage()
     }
+    */
     /* time () {
       return ('0' + this.calculateHours()).slice(-2) + ':' + ('0' + this.calculateMinutes()).slice(-2) + ':' + ('0' + this.calculateSeconds()).slice(-2)
     } */
   },
-  created () {
-    this.getTracks()
-  },
   methods: {
-    connectAnalyzer (audioMotion) {
-      this.analyzer = audioMotion.getAnalyzer()
-    },
-    getTracks () {
-      axios
-        .get('https://api.soundcloud.com/users/' + this.soundCloudUserId + '/tracks?client_id=' + this.clientId)
-        .then(result => { this.loadTracks(result.data) })
-        .catch(error => {
-          this.loadingError = error
-          console.log(error)
-        })
-    },
-    loadTracks (data) {
-      this.tracks = data
-      if (data.length > 0) {
-        // load the most recent track
-        this.loadTrack(data[0])
-      }
-    },
-    clickBack () {
+    /* clickBack () {
       this.audioPlayer.unsync().stop()
       Tone.Transport.stop()
       this.updateState()
@@ -182,6 +136,7 @@ export default {
       this.state = Tone.Transport.state
     },
     loadTrack (track) {
+      console.log(track)
       this.loading = true
       this.loadedTrack = track
       if (this.audioPlayer) {
@@ -190,7 +145,7 @@ export default {
       Tone.Transport.stop()
       this.audioPlayer = new Tone.Player(this.loadedTrack.stream_url + '?client_id=' + this.clientId, this.loaded)
       this.audioPlayer.volume.value = this.volume
-      this.audioPlayer.fan(this.analyzer)
+      // this.audioPlayer.fan(this.analyzer)
       this.audioPlayer.toMaster()
       this.updateState()
     },
@@ -208,7 +163,15 @@ export default {
         return 0
       }
     }
-    /* calculateHours () {
+    setTonePlayer (tonePlayer) {
+      this.tonePlayer = tonePlayer
+      this.audioCtx = tonePlayer.audioContext
+      if (this.analyzer) {
+        console.log('setTonePlayer is adding analyzer')
+        tonePlayer.addAnalyzer(this.analyzer)
+      }
+    },
+    calculateHours () {
       if (this.loadedTrack) {
         const secs = Tone.Transport.seconds
         return Math.floor(secs / 3600)

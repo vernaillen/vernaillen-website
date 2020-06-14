@@ -1,6 +1,6 @@
 <template>
   <div :class="pageHeaderClass">
-    <audioMotionAnalyzer v-if="analyzerOptions" :options="analyzerOptions" @audioMotion="connectAnalyzer"/>
+    <audioMotionAnalyzer :options="analyzerOptions" @audioMotion="connectAnalyzer"/>
     <div class="page-container q-px-md">
       <div class="row full-width">
         <div class="col-12 text-center">
@@ -35,12 +35,24 @@ export default {
     title: String,
     currentPageName: String,
     isBlogPost: Boolean,
-    analyzerOptions: {
-      required: false
-    },
     sticky: {
       boolean: false,
       required: false
+    }
+  },
+  data () {
+    return {
+      analyzerOptions: {
+        bgAlpha: 0,
+        showBgColor: false,
+        overlay: true,
+        showLeds: true,
+        showPeaks: false,
+        showScale: false,
+        gradient: 'rainbow',
+        mode: 6,
+        height: 105
+      }
     }
   },
   computed: {

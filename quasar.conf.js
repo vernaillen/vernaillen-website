@@ -10,7 +10,7 @@ module.exports = function (ctx) {
       'i18n',
       'addressbar-color',
       'highlight-js',
-      'vue-audiomotion-analyzer'
+      'vue-soundcloud'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -93,6 +93,9 @@ module.exports = function (ctx) {
       showProgress: true,
       gzip: false,
       analyze: false,
+      // added vueCompiler option cause custom plugins were not loading and cause this error:
+      // [Vue warn]: You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.
+      vueCompiler: true,
       // Options below are automatically set depending on the env, set them if you want to override
       // preloadChunks: false,
       // extractCSS: false,
