@@ -1,12 +1,6 @@
 <template>
   <q-page>
-    <page-header
-      elevated
-      :title="markdown.attributes.title"
-      currentUrl="/#/music"
-      :currentPageName="markdown.attributes.pageName"
-      sticky=true />
-    <div id="musicPageContent" class="page-container q-px-md">
+    <div id="musicPageContent" class="page-container q-pa-md">
       <q-card>
         <q-card-section>
           <q-markdown :src="markdown.body"/>
@@ -39,10 +33,9 @@
         </div>
         -->
       </q-card-section>
-      <tonePlayerWave />
-      <tonePlayerSoundCloud class="q-pa-md row items-start q-gutter-md" :userId="soundCloudUserId"/>
-      <br/><br/>
       <audioMotionAnalyzer :options="analyzerOptions" />
+      <tonePlayerSoundCloud class="q-pa-md row items-start q-gutter-md"/>
+      <br/><br/>
       <br/><br/>
     </div>
   </q-page>
@@ -51,22 +44,16 @@
 <script>
 import { markdownFiles } from '../load-markdown-files'
 import notFound from '../markdown/notFound.md'
-import PageHeader from '../components/PageHeader'
 
 export default {
   name: 'Music',
-  components: {
-    PageHeader
-  },
   data () {
     return {
       markdownFiles: markdownFiles,
       analyzerOptions: {
-        height: 105
+        height: 100
       },
       tracks: undefined,
-      soundCloudUserId: 45616,
-      clientId: '1745017edcfeb72a175c95614a1cc212',
       volume: -12,
       minVolume: -20,
       maxVolume: 0,
@@ -75,6 +62,9 @@ export default {
       loading: true,
       loadedTrack: undefined
     }
+  },
+  created () {
+    this.$emit('pageTitle', this.markdown.attributes.title)
   },
   computed: {
     markdown () {
@@ -205,8 +195,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-  #musicPageContent
-    margin-top: 150px
 
   .volume-button
     color: #1bbc9b

@@ -21,13 +21,17 @@ export default {
     return {
       slide: 1
     }
+  },
+  created () {
+    this.$emit('pageTitle', '')
   }
 }
 </script>
 
 <style scoped>
   .q-carousel {
-    height: calc(100vh - 101px);
+    margin-top: -80px;
+    height: calc(100vh - 120px);
   }
   .q-carousel__slide {
     padding: 0;

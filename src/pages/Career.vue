@@ -1,6 +1,5 @@
 <template>
   <q-page>
-    <page-header title="Career timeline" currentUrl="/#/career" currentPageName="Career" />
     <div class="page-container q-px-md">
       <q-timeline :layout="layout" color="primary">
         <q-timeline-entry
@@ -115,12 +114,11 @@
 </template>
 
 <script>
-import PageHeader from '../components/PageHeader'
 
 export default {
   name: 'Career',
-  components: {
-    PageHeader
+  created () {
+    this.$emit('pageTitle', 'Career Timeline')
   },
   computed: {
     layout () {

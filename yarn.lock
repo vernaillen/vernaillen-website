@@ -11237,10 +11237,10 @@ vue-server-renderer@2.6.11:
     serialize-javascript "^2.1.2"
     source-map "0.5.6"
 
-vue-soundcloud@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/vue-soundcloud/-/vue-soundcloud-0.0.3.tgz#a0a70b0f77a78ca4ccb8279dec7b29ac57fa0d91"
-  integrity sha512-vmGOyYTEmCrKuUFpzCyXQ320yREbP2TmhHpGVEtBAwdZAqTnlYoilRYeepUw6kJD3/gPUjIXj8tdR2fqaTjK8g==
+vue-soundcloud@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/vue-soundcloud/-/vue-soundcloud-0.0.4.tgz#ccda365bf995cb4d3f2c65fdf71b4909c7afdc87"
+  integrity sha512-HVKbW3e9wQGOlDX2J0SVN4QnelA0Vh+8nq3UYI21Ov+MH4JRFUksXW6BLHfFABOk6FACOf0BDAgx8Y1vE9NeOg==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.7"
     "@fortawesome/free-brands-svg-icons" "^5.4.2"

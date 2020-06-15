@@ -1,7 +1,9 @@
 <template>
   <q-layout view="hHr lpR fFr">
+    <page-header :title="pageTitle"/>
+    <q-linear-progress :value="progress" />
     <div id="pageWrapper" ref="pageWrapper">
-      <q-header elevated class="text-dark" height-hint="61">
+      <q-header elevated class="text-dark">
         <q-toolbar class="page-container">
           <q-btn
             v-if="$q.screen.lt.sm"
@@ -37,7 +39,7 @@
 
       <q-page-container class="page-wrapper">
         <transition name="fade" mode="out-in">
-          <router-view :key="$route.fullPath" />
+          <router-view :key="$route.fullPath" @pageTitle="setPageTitle" @isHome="setHome" />
         </transition>
         <q-scroll-observer @scroll="onScroll" />
         <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
@@ -45,9 +47,7 @@
         </q-page-scroller>
       </q-page-container>
 
-      <footer-player>
-        <q-linear-progress :value="progress" />
-      </footer-player>
+      <footer-player/>
     </div>
   </q-layout>
 </template>
@@ -57,6 +57,7 @@ import Logo from '../components/Logo'
 import PageNav from '../components/PageNav'
 import ToolbarActions from '../components/ToolbarActions'
 import FooterPlayer from '../components/FooterPlayer'
+import PageHeader from '../components/PageHeader'
 
 export default {
   name: 'MyLayout',
@@ -64,6 +65,7 @@ export default {
     Logo,
     PageNav,
     ToolbarActions,
+    PageHeader,
     FooterPlayer
   },
   data () {
@@ -71,13 +73,17 @@ export default {
       showDrawer: false,
       scrollInfo: {},
       progress: 0,
-      pageHeight: 0
+      pageHeight: 0,
+      pageTitle: 'Home'
     }
   },
   methods: {
     onScroll (info) {
       this.scrollInfo = info
       this.progress = info.position / (this.pageHeight - this.$q.screen.height)
+    },
+    setPageTitle (title) {
+      this.pageTitle = title
     }
   },
   updated () {
@@ -89,6 +95,9 @@ export default {
 </script>
 
 <style lang="sass">
+  .page-wrapper
+    margin-top: 80px
+
   header,
   #menu-toolbar
     height: 61px
@@ -106,4 +115,5 @@ export default {
 
   .q-linear-progress
     height: 1.2em
+
 </style>

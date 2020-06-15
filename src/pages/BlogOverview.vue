@@ -1,7 +1,5 @@
 <template>
   <q-page>
-    <page-header v-if="!tag" title="Wouter's blog" currentUrl="/#/blog" currentPageName="Blog" />
-    <page-header v-if="tag" title="Wouter's blog" :currentPageName="'tag: ' + tag" isBlogPost="true" />
     <div class="page-container q-pa-md">
       <div v-if="tag">
         <router-link to="/blog"><q-icon name="fas fa-window-close"/></router-link>
@@ -44,7 +42,6 @@
 
 <script>
 import { markdownFiles } from '../load-markdown-files'
-import PageHeader from '../components/PageHeader'
 import BlogPostTags from '../components/BlogPostTags'
 
 export default {
@@ -57,8 +54,10 @@ export default {
     }
   },
   components: {
-    PageHeader,
     BlogPostTags
+  },
+  created () {
+    this.$emit('pageTitle', 'Wouter\'s Blog')
   },
   computed: {
     blogPosts () {

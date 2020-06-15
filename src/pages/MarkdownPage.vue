@@ -1,6 +1,5 @@
 <template>
   <q-page class="markdown-page">
-    <page-header :title="markdown.attributes.title" :currentPageName="currentPageName" :isBlogPost="markdown.isBlogPost" />
     <div v-if="markdown.isBlogPost" class="page-container q-pa-md">
       <div class="row q-col-gutter-lg">
         <div class="col-12 col-md-9">
@@ -55,7 +54,6 @@
 <script>
 import { markdownFiles } from '../load-markdown-files'
 import notFound from '../markdown/notFound.md'
-import PageHeader from '../components/PageHeader'
 import BlogPostTags from '../components/BlogPostTags'
 import hljs from 'highlight.js'
 import Stickyfill from 'stickyfilljs'
@@ -66,7 +64,6 @@ export default {
     pathMatch: String
   },
   components: {
-    PageHeader,
     BlogPostTags
   },
   data () {
@@ -124,6 +121,9 @@ export default {
       }
       return url + this.pathMatch + '.md'
     }
+  },
+  created () {
+    this.$emit('pageTitle', this.markdown.attributes.title)
   },
   mounted () {
     document.querySelectorAll('pre code').forEach((block) => {

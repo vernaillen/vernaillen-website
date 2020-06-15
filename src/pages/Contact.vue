@@ -1,7 +1,6 @@
 <template>
   <q-page>
-    <page-header title="Get in touch" currentUrl="/#/contact" currentPageName="Contact" />
-    <div class="page-container q-px-md">
+    <div class="page-container q-pa-md">
       <q-card>
         <q-card-section>
           <q-markdown :src="markdowns.body"/>
@@ -26,16 +25,15 @@
 <script>
 import { markdownFiles } from '../load-markdown-files'
 import notFound from '../markdown/notFound.md'
-import PageHeader from '../components/PageHeader'
 
 export default {
-  components: {
-    PageHeader
-  },
   data () {
     return {
       markdownFiles: markdownFiles
     }
+  },
+  created () {
+    this.$emit('pageTitle', 'Get in touch')
   },
   computed: {
     markdowns () {
