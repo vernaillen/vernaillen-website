@@ -10,7 +10,8 @@ module.exports = function (ctx) {
       'i18n',
       'addressbar-color',
       'highlight-js',
-      'vue-soundcloud'
+      'vue-soundcloud',
+      'progress-bar'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css

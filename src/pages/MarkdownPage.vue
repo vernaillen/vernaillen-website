@@ -123,7 +123,11 @@ export default {
     }
   },
   created () {
-    this.$emit('pageTitle', this.markdown.attributes.title)
+    this.$emit('pageData', {
+      pageTitle: this.markdown.attributes.title,
+      pageName: this.currentPageName,
+      isBlogPost: this.markdown.isBlogPost
+    })
   },
   mounted () {
     document.querySelectorAll('pre code').forEach((block) => {

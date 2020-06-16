@@ -21,7 +21,10 @@
 export default {
   name: 'Error404',
   created () {
-    this.$emit('pageTitle', 'Oops, something went wrong')
+    this.$emit('pageData', {
+      pageTitle: 'Oops, something went wrong',
+      pageName: '404'
+    })
   }
 }
 </script>

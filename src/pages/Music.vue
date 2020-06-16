@@ -26,14 +26,7 @@
         <!--div id="time">
           {{time}}
         </div-->
-        <!--
-        <div id="waveformProgress">
-          <q-linear-progress :value="percentage" color="#1bbc9b" class="q-mt-sm" />
-          <div class="waveformImg" :style="waveformBg"></div>
-        </div>
-        -->
       </q-card-section>
-      <audioMotionAnalyzer :options="analyzerOptions" />
       <tonePlayerSoundCloud class="q-pa-md row items-start q-gutter-md"/>
       <br/><br/>
       <br/><br/>
@@ -64,7 +57,10 @@ export default {
     }
   },
   created () {
-    this.$emit('pageTitle', this.markdown.attributes.title)
+    this.$emit('pageData', {
+      pageTitle: this.markdown.attributes.title,
+      pageName: 'Music'
+    })
   },
   computed: {
     markdown () {
@@ -74,121 +70,13 @@ export default {
         }
       }
       return { title: '404', body: notFound, isBlogPost: false }
-    },
-    waveformBg () {
-      if (this.loadedTrack) {
-        return 'background-image: url(' + this.loadedTrack.waveform_url + ')'
-      } else {
-        return ''
-      }
     }
-    /*
-    playButtonIcon () {
-      if (this.state === 'started') {
-        return 'fa fa-pause'
-      } else {
-        return 'fa fa-play'
-      }
-    },
-    backDisabled () {
-      return this.loading || this.state === 'stopped'
-    },
-    percentage () {
-      return this.calculatePercentage()
-    }
-    */
-    /* time () {
-      return ('0' + this.calculateHours()).slice(-2) + ':' + ('0' + this.calculateMinutes()).slice(-2) + ':' + ('0' + this.calculateSeconds()).slice(-2)
-    } */
   },
   methods: {
-    /* clickBack () {
-      this.audioPlayer.unsync().stop()
-      Tone.Transport.stop()
-      this.updateState()
-    },
-    click () {
-      if (this.state === 'started') {
-        Tone.Transport.pause()
-      } else {
-        if (this.percentage > 1) {
-          this.audioPlayer.unsync()
-          Tone.Transport.stop()
-        }
-        if (this.state !== 'paused') {
-          this.audioPlayer.sync().start()
-        }
-        Tone.Transport.start()
-      }
-      this.updateState()
-    },
-    updateState () {
-      this.state = Tone.Transport.state
-    },
-    loadTrack (track) {
-      console.log(track)
-      this.loading = true
-      this.loadedTrack = track
-      if (this.audioPlayer) {
-        this.audioPlayer.unsync().stop()
-      }
-      Tone.Transport.stop()
-      this.audioPlayer = new Tone.Player(this.loadedTrack.stream_url + '?client_id=' + this.clientId, this.loaded)
-      this.audioPlayer.volume.value = this.volume
-      // this.audioPlayer.fan(this.analyzer)
-      this.audioPlayer.toMaster()
-      this.updateState()
-    },
-    loaded () {
-      this.loading = false
-    },
-    calculatePercentage () {
-      if (this.loadedTrack) {
-        const perc = (Tone.Transport.seconds / this.loadedTrack.duration) * 1000
-        if (perc > 1) {
-          Tone.Transport.pause()
-        }
-        return perc
-      } else {
-        return 0
-      }
-    }
-    setTonePlayer (tonePlayer) {
-      this.tonePlayer = tonePlayer
-      this.audioCtx = tonePlayer.audioContext
-      if (this.analyzer) {
-        console.log('setTonePlayer is adding analyzer')
-        tonePlayer.addAnalyzer(this.analyzer)
-      }
-    },
-    calculateHours () {
-      if (this.loadedTrack) {
-        const secs = Tone.Transport.seconds
-        return Math.floor(secs / 3600)
-      } else {
-        return 0
-      }
-    },
-    calculateMinutes () {
-      if (this.loadedTrack) {
-        const secs = Tone.Transport.seconds
-        return Math.floor(secs / 60)
-      } else {
-        return 0
-      }
-    },
-    calculateSeconds () {
-      if (this.loadedTrack) {
-        const secs = Tone.Transport.seconds
-        return Math.floor(secs % 60)
-      } else {
-        return 0
-      }
-    } */
   },
   watch: {
     volume: function (value) {
-      this.audioPlayer.volume.value = value
+      // this.audioPlayer.volume.value = value
     }
   }
 }

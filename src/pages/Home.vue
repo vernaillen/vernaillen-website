@@ -23,15 +23,21 @@ export default {
     }
   },
   created () {
-    this.$emit('pageTitle', '')
+    this.$emit('pageData', {
+      pageTitle: 'Home'
+    })
   }
 }
 </script>
 
 <style scoped>
   .q-carousel {
-    margin-top: -80px;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 177px);
+  }
+  @media (min-width: 1024px) {
+    .q-carousel {
+      height: calc(100vh - 121px);
+    }
   }
   .q-carousel__slide {
     padding: 0;

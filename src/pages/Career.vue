@@ -118,7 +118,10 @@
 export default {
   name: 'Career',
   created () {
-    this.$emit('pageTitle', 'Career Timeline')
+    this.$emit('pageData', {
+      pageTitle: 'Career Timeline',
+      pageName: 'Career'
+    })
   },
   computed: {
     layout () {

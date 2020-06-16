@@ -57,7 +57,18 @@ export default {
     BlogPostTags
   },
   created () {
-    this.$emit('pageTitle', 'Wouter\'s Blog')
+    let isTagPage = false
+    let pageTitle = 'Wouter\'s Blog'
+    if (this.tag) {
+      isTagPage = true
+      pageTitle = 'posts about \'' + this.tag + '\''
+    }
+    this.$emit('pageData', {
+      pageTitle: pageTitle,
+      pageName: 'Blog',
+      tag: this.tag,
+      isTagPage: isTagPage
+    })
   },
   computed: {
     blogPosts () {

@@ -33,7 +33,10 @@ export default {
     }
   },
   created () {
-    this.$emit('pageTitle', 'Get in touch')
+    this.$emit('pageData', {
+      pageTitle: 'Get in touch',
+      pageName: 'Contact'
+    })
   },
   computed: {
     markdowns () {

@@ -1,6 +1,6 @@
 {
   "name": "vernaillen-website",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Quasar Framework app",
   "productName": "Wouter Vernaillen",
   "cordovaId": "com.vernaillen.website.app",
@@ -24,10 +24,11 @@
     "concurrently:dev:jest": "concurrently \"quasar dev\" \"jest --watch\""
   },
   "dependencies": {
+    "@guillaumebriday/vue-scroll-progress-bar": "^1.0.0",
     "@quasar/extras": "^1.8.2",
     "axios": "^0.19.2",
-    "highlight.js": "^10.0.3",
-    "quasar": "^1.12.3",
+    "highlight.js": "^10.1.0",
+    "quasar": "^1.12.5",
     "stickyfilljs": "^2.1.0",
     "vue-i18n": "^8.18.1",
     "vue-soundcloud": "^0.0.4",

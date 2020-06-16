@@ -1,7 +1,6 @@
 <template>
   <q-layout view="hHr lpR fFr">
-    <page-header :title="pageTitle"/>
-    <q-linear-progress :value="progress" />
+    <page-header :title="pageTitle" :currentUrl="pageUrl" :currentPageName="pageName" :isBlogPost="isBlogPost" :isTagPage="isTagPage" :tag="tag"/>
     <div id="pageWrapper" ref="pageWrapper">
       <q-header elevated class="text-dark">
         <q-toolbar class="page-container">
@@ -39,16 +38,16 @@
 
       <q-page-container class="page-wrapper">
         <transition name="fade" mode="out-in">
-          <router-view :key="$route.fullPath" @pageTitle="setPageTitle" @isHome="setHome" />
+          <router-view :key="$route.fullPath" @pageData="setPageData" />
         </transition>
-        <q-scroll-observer @scroll="onScroll" />
         <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
           <q-btn fab icon="fas fa-long-arrow-alt-up" class="shadow-4" color="primary" alt="Back to top" aria-label="Back to top" />
         </q-page-scroller>
       </q-page-container>
 
-      <footer-player/>
+      <footer-player />
     </div>
+    <vue-scroll-progress-bar backgroundColor="#1bbc9b" height="0.3rem" zIndex="2050" />
   </q-layout>
 </template>
 
@@ -71,32 +70,28 @@ export default {
   data () {
     return {
       showDrawer: false,
-      scrollInfo: {},
-      progress: 0,
-      pageHeight: 0,
-      pageTitle: 'Home'
+      pageTitle: 'Home',
+      pageName: '',
+      pageUrl: '/',
+      isBlogPost: false,
+      isTagPage: false,
+      tag: undefined
     }
   },
   methods: {
-    onScroll (info) {
-      this.scrollInfo = info
-      this.progress = info.position / (this.pageHeight - this.$q.screen.height)
-    },
-    setPageTitle (title) {
-      this.pageTitle = title
+    setPageData (data) {
+      this.pageTitle = data.pageTitle
+      this.pageName = data.pageName
+      this.isBlogPost = data.isBlogPost
+      this.isTagPage = data.isTagPage
+      this.tag = data.tag
     }
-  },
-  updated () {
-    this.$nextTick(function () {
-      this.pageHeight = this.$refs.pageWrapper.clientHeight
-    })
   }
 }
 </script>
 
 <style lang="sass">
   .page-wrapper
-    margin-top: 80px
 
   header,
   #menu-toolbar
@@ -113,7 +108,9 @@ export default {
   .fade-leave-active
     opacity: 0
 
-  .q-linear-progress
-    height: 1.2em
+  .progress-bar-container--container
+    margin-top: -4px
+    top: 100vh !important
+    bottom: 0 !important
 
 </style>
