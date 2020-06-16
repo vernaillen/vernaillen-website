@@ -1,6 +1,6 @@
 {
   "name": "vernaillen-website",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A Quasar Framework app",
   "productName": "Wouter Vernaillen",
   "cordovaId": "com.vernaillen.website.app",
@@ -31,7 +31,7 @@
     "quasar": "^1.12.5",
     "stickyfilljs": "^2.1.0",
     "vue-i18n": "^8.18.1",
-    "vue-soundcloud": "^0.0.4",
+    "vue-soundcloud": "^0.0.5",
     "vuex": "^3.4.0"
   },
   "devDependencies": {

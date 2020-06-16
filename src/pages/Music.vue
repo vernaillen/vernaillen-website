@@ -27,7 +27,7 @@
           {{time}}
         </div-->
       </q-card-section>
-      <tonePlayerSoundCloud class="q-pa-md row items-start q-gutter-md"/>
+      <tonePlayerSoundCloud class="q-gutter-y-md"/>
       <br/><br/>
       <br/><br/>
     </div>

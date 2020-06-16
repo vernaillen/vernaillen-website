@@ -9,7 +9,7 @@
             <tonePlayerControls />
           </div>
           <div class="scWave col-12 col-md-6">
-            <tonePlayerWave :options="waveFormOptions" />
+            <tonePlayerWave id="footerWaveform" :options="waveFormOptions" />
           </div>
         </div>
       </div>
@@ -27,8 +27,11 @@ export default {
         progressColor: '#1bbc9b',
         cursorColor: '#1bbc9b',
         cursorWidth: 1,
-        // progressColor: 'yellow',
-        height: 60
+        scrollParent: false,
+        responsive: true,
+        skipLength: 10,
+        height: 60,
+        barHeight: 1.2
       },
       analyzerOptions: {
         barSpace: 0.5,
@@ -60,14 +63,17 @@ export default {
 
   .scControl
   .scWave
-  .scAnalyzer
     height: 60px
 
   .scControl
     padding: 10px
 
-  .scAnalyzer
-    position: relative
+  .scWave
+    width: 100vw - 1
+
+  @media (min-width: 1024px)
+    .scWave
+      width: 50vw - 1
 
   #audioMotionAnalyzer
     position: fixed
@@ -78,4 +84,13 @@ export default {
   @media (min-width: 1024px)
     #audioMotionAnalyzer
       bottom: 54px
+</style>
+
+<style lang="sass">
+  .scTrackLink
+    color: #333
+    text-decoration: none
+
+  .scTrackLink:hover
+    color: gray
 </style>
