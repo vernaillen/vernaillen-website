@@ -2269,10 +2269,10 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-audiomotion-analyzer@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/audiomotion-analyzer/-/audiomotion-analyzer-2.3.0.tgz#de66c077586a5d31b2e6602a8e6df61968fe4c24"
-  integrity sha512-WKsrWl4h2lZiA6AJixeRScT7SN5ZVc9KEeQOctZ3HO9pUj/16OwYSQ3uZLh+fc185XESSAUaDInMcHlVsP5Dhg==
+audiomotion-analyzer@^2.4.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/audiomotion-analyzer/-/audiomotion-analyzer-2.5.0.tgz#e56dec74744d94b5cef76ef2fd3a2e63164f1cae"
+  integrity sha512-KTpD4gRcaijICRE57P133TECftbdhmObJTAMYgZJBiqldU70TwnT0IYYnH5JO3sxLf67Ae7Y8VUbM0u6pX6SaQ==
 
 autoprefixer@9.8.0:
   version "9.8.0"
@@ -5587,10 +5587,10 @@ hex-color-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
 
-highlight.js@^10.4.1:
-  version "10.4.1"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.4.1.tgz#d48fbcf4a9971c4361b3f95f302747afe19dbad0"
-  integrity sha512-yR5lWvNz7c85OhVAEAeFhVCc/GV4C30Fjzc/rCP0aCWzc1UUOPUk55dK/qdwTZHBvMZo+eZ2jpk62ndX/xMFlg==
+highlight.js@^10.7.2:
+  version "10.7.2"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.2.tgz#89319b861edc66c48854ed1e6da21ea89f847360"
+  integrity sha512-oFLl873u4usRM9K63j4ME9u3etNF0PLiJhSQ8rdfuL51Wn3zkD6drf9ZW0dOzjnZI22YYG24z30JcmfCZjMgYg==
 
 hmac-drbg@^1.0.1:
   version "1.0.1"
@@ -7689,10 +7689,15 @@ mkdirp@^1.0.3, mkdirp@^1.0.4, mkdirp@~1.0.3:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-moment@^2.22.1, moment@^2.26.0:
+moment@^2.22.1:
   version "2.26.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.26.0.tgz#5e1f82c6bafca6e83e808b30c8705eed0dcbd39a"
   integrity sha512-oIixUO+OamkUkwjhAVE18rAMfRJNsNe/Stid/gwHSOfHrOtw9EhAY2AHvdKZ/k/MggcYELFCJz/Sn2pL8b8JMw==
+
+moment@^2.29.1:
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -11269,10 +11274,10 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
   integrity sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==
 
-vue-i18n@^8.18.1:
-  version "8.18.2"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.18.2.tgz#cd7c12f2e178e6faa23b0e3cfd2f7bac9305f8fc"
-  integrity sha512-0X5nBTCZAVjlwcrPaYJwNs3iipBBTv0AUHwQUOa8yP3XbQGWKbRHqBb3OhCYtum/IHDD21d/df5Xd2VgyxbxfA==
+vue-i18n@^8.24.4:
+  version "8.24.4"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.24.4.tgz#b158614c1df7db183d9cadddbb73e1d540269492"
+  integrity sha512-RZE94WUAGxEiBAANxQ0pptbRwDkNKNSXl3fnJslpFOxVMF6UkUtMDSuYGuW2blDrVgweIXVpethOVkYoNNT9xw==
 
 vue-jest@^3.0.2:
   version "3.0.5"
@@ -11320,17 +11325,17 @@ vue-server-renderer@2.6.11:
     serialize-javascript "^2.1.2"
     source-map "0.5.6"
 
-vue-soundcloud@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/vue-soundcloud/-/vue-soundcloud-0.0.5.tgz#68def651520c72406717ff8d0dbaf243a699877a"
-  integrity sha512-GLa4dZfVS6zGjB3Dpq9bx1LqV9mRhDzHFenD7yGnCZyJwSd2Tr0nnbtg2guye+/3QfeU2EIUVgHqTYpyfseBSg==
+vue-soundcloud@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/vue-soundcloud/-/vue-soundcloud-0.0.6.tgz#94ffe8032291946ff3f9d9e23aae5fbb78b3260d"
+  integrity sha512-qmshKaR0Ly7ZkgEyCOZjtqL0dExYOeumaofLAJ3r41afF9VpxPK9Kq+46kMkCYUhCChR1CVYTANTNIAKZezuJg==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.7"
     "@fortawesome/free-brands-svg-icons" "^5.4.2"
     "@fortawesome/free-regular-svg-icons" "^5.4.2"
     "@fortawesome/free-solid-svg-icons" "^5.4.2"
     "@fortawesome/vue-fontawesome" "^0.1.9"
-    audiomotion-analyzer "^2.3.0"
+    audiomotion-analyzer "^2.4.0"
     axios "^0.19.2"
     tone "^13.8.25"
     wavesurfer.js "^3.3.3"
@@ -11361,10 +11366,15 @@ vue@2.6.11:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
 
-vuex@3.4.0, vuex@^3.4.0:
+vuex@3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.4.0.tgz#20cc086062d750769fce1febb34e7fceeaebde45"
   integrity sha512-ajtqwEW/QhnrBZQsZxCLHThZZaa+Db45c92Asf46ZDXu6uHXgbfVuBaJ4gzD2r4UX0oMJHstFwd2r2HM4l8umg==
+
+vuex@^3.6.2:
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.6.2.tgz#236bc086a870c3ae79946f107f16de59d5895e71"
+  integrity sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==
 
 w3c-hr-time@^1.0.1:
   version "1.0.2"
